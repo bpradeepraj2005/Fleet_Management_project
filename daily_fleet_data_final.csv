@@ -1,0 +1,301 @@
+log_id,date,driver_id,vehicle_id,car_name,predominant_location_type,source,destination,daily_distance_km,average_speed_kmh,harsh_braking_instances,harsh_acceleration_instances,end_of_day_charge_percentage,daily_income,maintenance_charges,performance_score
+LOG_000001,01-06-2026,USR_DRV_01,EV_03,Tata Punch,City,Industrial Hub,Airport Terminal 1,59.4,36.2,8,7,74.1,89.1,0,78.1
+LOG_000002,01-06-2026,USR_DRV_02,EV_07,MG Windsor,Highway,Central Station,Tech Park,198.6,116.4,1,0,27.3,297.9,0,73.6
+LOG_000003,01-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,Industrial Hub,147.5,112.7,1,1,31.9,221.25,0,75.1
+LOG_000004,01-06-2026,USR_DRV_04,EV_10,Tata Punch,Highway,Industrial Hub,City Mall,143.4,115.8,0,2,34.4,215.1,0,73.4
+LOG_000005,01-06-2026,USR_DRV_05,EV_02,Tata Punch,City,City Mall,Central Station,51.2,37,7,5,82.2,76.8,0,83.3
+LOG_000006,01-06-2026,USR_DRV_06,EV_01,MG Windsor,City,Industrial Hub,Tech Park,72.3,32.6,6,5,80.1,108.45,166.11,69.2
+LOG_000007,01-06-2026,USR_DRV_07,EV_02,Tata Punch,City,Industrial Hub,Central Station,77.9,39,10,10,64.9,116.85,265.23,55.1
+LOG_000008,01-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,Tech Park,56.9,22.2,5,9,82.7,85.35,0,78.2
+LOG_000009,01-06-2026,USR_DRV_09,EV_10,Tata Punch,City,Central Station,Industrial Hub,74.9,45.2,7,4,74.4,112.35,0,84.8
+LOG_000010,01-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,Industrial Hub,City Mall,215.7,102.7,2,3,10.9,323.55,0,78
+LOG_000011,02-06-2026,USR_DRV_01,EV_03,Tata Punch,Highway,City Mall,Industrial Hub,114.5,88,1,2,50,171.75,0,92.3
+LOG_000012,02-06-2026,USR_DRV_02,EV_07,MG Windsor,City,Airport Terminal 1,Central Station,79.8,60,5,7,70.8,119.7,0,81.1
+LOG_000013,02-06-2026,USR_DRV_03,EV_03,Tata Punch,Highway,Airport Terminal 1,Industrial Hub,196.9,90.7,0,2,10.4,295.35,0,92.3
+LOG_000014,02-06-2026,USR_DRV_04,EV_07,MG Windsor,City,Central Station,Airport Terminal 1,52.1,40.8,13,7,82,78.15,221.38,54.8
+LOG_000015,02-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,Central Station,153.2,85,1,0,45.9,229.8,0,99.5
+LOG_000016,02-06-2026,USR_DRV_06,EV_10,Tata Punch,City,Airport Terminal 1,Industrial Hub,56.7,29.5,7,4,79.3,85.05,0,85
+LOG_000017,02-06-2026,USR_DRV_07,EV_09,Tata Punch,Highway,Tech Park,Industrial Hub,183.6,106,2,3,17.3,275.4,0,74.8
+LOG_000018,02-06-2026,USR_DRV_08,EV_07,MG Windsor,City,Industrial Hub,Central Station,71.1,21.1,6,6,83.9,106.65,0,81
+LOG_000019,02-06-2026,USR_DRV_09,EV_04,MG Windsor,City,Airport Terminal 1,Central Station,62.7,38.2,5,4,83.8,94.05,0,85.7
+LOG_000020,02-06-2026,USR_DRV_10,EV_04,MG Windsor,City,Industrial Hub,Central Station,53.1,43.6,9,12,83.4,79.65,265.35,52.7
+LOG_000021,03-06-2026,USR_DRV_01,EV_01,MG Windsor,City,Tech Park,Industrial Hub,47.4,51,5,8,84.4,71.1,0,82
+LOG_000022,03-06-2026,USR_DRV_02,EV_07,MG Windsor,City,Industrial Hub,Tech Park,37.3,43.5,5,7,86.3,55.95,0,81.8
+LOG_000023,03-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,Highway,Industrial Hub,Central Station,180.1,101.7,3,0,16.8,270.15,0,81.4
+LOG_000024,03-06-2026,USR_DRV_04,EV_02,Tata Punch,City,Tech Park,City Mall,63.3,52.4,6,11,71,94.95,201.25,60.7
+LOG_000025,03-06-2026,USR_DRV_05,EV_02,Tata Punch,City,City Mall,Tech Park,32.4,30.9,4,10,88.7,48.6,165.79,64.6
+LOG_000026,03-06-2026,USR_DRV_06,EV_01,MG Windsor,City,Central Station,Airport Terminal 1,82,41.1,5,4,77.4,123,0,86.7
+LOG_000027,03-06-2026,USR_DRV_07,EV_09,Tata Punch,City,Central Station,City Mall,50.1,58,14,5,77.4,75.15,0,72
+LOG_000028,03-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Industrial Hub,83.6,34.9,9,4,74.6,125.4,195.44,64.5
+LOG_000029,03-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,City,Airport Terminal 1,City Mall,73,32.2,8,9,74.6,109.5,166.7,60.1
+LOG_000030,03-06-2026,USR_DRV_10,EV_01,MG Windsor,City,City Mall,Airport Terminal 1,41,52.9,7,11,87.2,61.5,0,72.2
+LOG_000031,04-06-2026,USR_DRV_01,EV_03,Tata Punch,City,City Mall,Tech Park,45.3,31.1,11,7,80.2,67.95,0,73.5
+LOG_000032,04-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,Highway,Central Station,Airport Terminal 1,205.2,98.8,2,5,0,307.8,139.82,63
+LOG_000033,04-06-2026,USR_DRV_03,EV_04,MG Windsor,Highway,Industrial Hub,Central Station,146.2,102.4,0,3,49.7,219.3,102.81,66.7
+LOG_000034,04-06-2026,USR_DRV_04,EV_07,MG Windsor,City,Tech Park,Industrial Hub,33.8,50.8,8,7,88.3,50.7,0,78.2
+LOG_000035,04-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,Highway,City Mall,Tech Park,148.3,71.8,0,1,47.6,222.45,0,99
+LOG_000036,04-06-2026,USR_DRV_06,EV_10,Tata Punch,Highway,City Mall,Central Station,136.5,73.2,2,2,50.2,204.75,0,93.8
+LOG_000037,04-06-2026,USR_DRV_07,EV_02,Tata Punch,City,Industrial Hub,City Mall,73.7,58.8,11,11,66.8,110.55,271.89,52.4
+LOG_000038,04-06-2026,USR_DRV_08,EV_07,MG Windsor,City,Tech Park,Airport Terminal 1,74.4,22.9,3,9,83.2,111.6,0,82.8
+LOG_000039,04-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,Highway,Industrial Hub,Airport Terminal 1,186.2,72.7,1,0,35.3,279.3,0,99.7
+LOG_000040,04-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,Airport Terminal 1,Tech Park,196.5,96.3,1,2,18.8,294.75,0,85.3
+LOG_000041,05-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,Highway,Industrial Hub,Tech Park,214,107.4,2,3,5.2,321,0,75.6
+LOG_000042,05-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,Industrial Hub,154,114.6,3,1,24.3,231,0,70.2
+LOG_000043,05-06-2026,USR_DRV_03,EV_03,Tata Punch,Highway,City Mall,Central Station,185.6,92,1,4,15.6,278.4,95.88,71.5
+LOG_000044,05-06-2026,USR_DRV_04,EV_02,Tata Punch,City,Central Station,Industrial Hub,52.4,47,8,6,76,78.6,0,80.2
+LOG_000045,05-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Industrial Hub,City Mall,56.2,45.1,5,6,80.4,84.3,0,84.5
+LOG_000046,05-06-2026,USR_DRV_06,EV_01,MG Windsor,City,City Mall,Airport Terminal 1,45,36.1,6,9,87.6,67.5,0,78.2
+LOG_000047,05-06-2026,USR_DRV_07,EV_09,Tata Punch,City,Industrial Hub,Central Station,79.9,47.8,11,5,64,119.85,0,77.1
+LOG_000048,05-06-2026,USR_DRV_08,EV_07,MG Windsor,City,Tech Park,Industrial Hub,48,29,5,8,89.1,72,0,81.9
+LOG_000049,05-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,Highway,Central Station,Industrial Hub,102.3,76.2,2,1,64.4,153.45,0,96.3
+LOG_000050,05-06-2026,USR_DRV_10,EV_04,MG Windsor,City,Central Station,Tech Park,41,28.1,5,5,87.2,61.5,0,85.2
+LOG_000051,06-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,Highway,Tech Park,City Mall,120.1,99.1,2,0,46.8,180.15,0,87.1
+LOG_000052,06-06-2026,USR_DRV_02,EV_07,MG Windsor,City,Tech Park,Industrial Hub,51.8,55.4,5,12,81,77.7,0,73.3
+LOG_000053,06-06-2026,USR_DRV_03,EV_04,MG Windsor,City,Industrial Hub,Central Station,49.1,43.3,8,9,83.1,73.65,0,75.5
+LOG_000054,06-06-2026,USR_DRV_04,EV_10,Tata Punch,City,City Mall,Tech Park,65,55.8,11,9,70.3,97.5,0,71.4
+LOG_000055,06-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,Highway,City Mall,Industrial Hub,199.1,78.7,0,0,29.7,298.65,0,99.3
+LOG_000056,06-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,City,City Mall,Industrial Hub,48.5,36.3,6,7,82.1,72.75,0,79.8
+LOG_000057,06-06-2026,USR_DRV_07,EV_09,Tata Punch,Highway,Industrial Hub,Central Station,162,89.8,0,1,27.1,243,0,93.9
+LOG_000058,06-06-2026,USR_DRV_08,EV_02,Tata Punch,Highway,City Mall,Central Station,111.2,60.3,1,0,66.7,166.8,0,98.4
+LOG_000059,06-06-2026,USR_DRV_09,EV_04,MG Windsor,Highway,City Mall,Tech Park,142.2,74.3,0,0,63.2,213.3,0,99.4
+LOG_000060,06-06-2026,USR_DRV_10,EV_04,MG Windsor,City,Airport Terminal 1,Tech Park,70.6,35.2,9,11,77.9,105.9,0,71.4
+LOG_000061,07-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,City Mall,121.5,81.9,1,1,46.2,182.25,0,97.2
+LOG_000062,07-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,City,City Mall,Central Station,78,50.8,10,9,61.7,117,168.06,57.8
+LOG_000063,07-06-2026,USR_DRV_03,EV_04,MG Windsor,City,Central Station,Industrial Hub,57,47.8,11,6,80.4,85.5,0,75.8
+LOG_000064,07-06-2026,USR_DRV_04,EV_02,Tata Punch,City,Central Station,Industrial Hub,63.3,54.6,7,9,71,94.95,0,75.8
+LOG_000065,07-06-2026,USR_DRV_05,EV_09,Tata Punch,Highway,Tech Park,Central Station,173.2,82.1,2,0,39.7,259.8,0,97.5
+LOG_000066,07-06-2026,USR_DRV_06,EV_10,Tata Punch,City,Airport Terminal 1,Central Station,38.6,34.2,9,7,85.9,57.9,168.63,60.3
+LOG_000067,07-06-2026,USR_DRV_07,EV_09,Tata Punch,City,Airport Terminal 1,City Mall,73.3,48.8,11,13,67,109.95,0,64.1
+LOG_000068,07-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Airport Terminal 1,33.9,23.2,5,7,89.7,50.85,0,81.4
+LOG_000069,07-06-2026,USR_DRV_09,EV_10,Tata Punch,Highway,Tech Park,Industrial Hub,213.1,75.3,1,0,27,319.65,79.11,83
+LOG_000070,07-06-2026,USR_DRV_10,EV_01,MG Windsor,City,Central Station,Tech Park,82.9,50.6,9,12,74.1,124.35,0,69
+LOG_000071,08-06-2026,USR_DRV_01,EV_01,MG Windsor,City,Airport Terminal 1,Industrial Hub,58.5,42,7,13,80.7,87.75,0,70.9
+LOG_000072,08-06-2026,USR_DRV_02,EV_07,MG Windsor,Highway,Tech Park,Industrial Hub,140,112,3,1,48.7,210,0,71.8
+LOG_000073,08-06-2026,USR_DRV_03,EV_04,MG Windsor,City,City Mall,Central Station,47.3,40.1,14,8,83.7,70.95,0,68.5
+LOG_000074,08-06-2026,USR_DRV_04,EV_07,MG Windsor,Highway,City Mall,Central Station,122.5,96.4,2,3,57.6,183.75,0,82.5
+LOG_000075,08-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Tech Park,Industrial Hub,78.4,34.4,3,8,72.7,117.6,0,84.1
+LOG_000076,08-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,City Mall,35.1,48.4,10,7,87,52.65,233.31,59.5
+LOG_000077,08-06-2026,USR_DRV_07,EV_02,Tata Punch,Highway,Industrial Hub,Tech Park,149.9,98.5,1,2,32.5,224.85,0,83.8
+LOG_000078,08-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,City,Central Station,City Mall,72.5,37,5,8,78,108.75,0,79
+LOG_000079,08-06-2026,USR_DRV_09,EV_04,MG Windsor,Highway,Industrial Hub,City Mall,203.8,74.1,1,1,47.2,305.7,0,96.6
+LOG_000080,08-06-2026,USR_DRV_10,EV_01,MG Windsor,City,Airport Terminal 1,Industrial Hub,42.8,48.9,4,10,86.6,64.2,0,79.9
+LOG_000081,09-06-2026,USR_DRV_01,EV_01,MG Windsor,City,City Mall,Central Station,36.9,57.2,7,5,87.8,55.35,0,80.8
+LOG_000082,09-06-2026,USR_DRV_02,EV_06,Mahindra XUV 3XO EV,City,Airport Terminal 1,Industrial Hub,77.9,63.6,5,13,61.7,116.85,227.96,57.7
+LOG_000083,09-06-2026,USR_DRV_03,EV_03,Tata Punch,Highway,Industrial Hub,City Mall,214.5,103.9,3,2,2.4,321.75,0,77.7
+LOG_000084,09-06-2026,USR_DRV_04,EV_02,Tata Punch,Highway,Airport Terminal 1,Central Station,152.1,88.4,2,4,30.4,228.15,0,88.9
+LOG_000085,09-06-2026,USR_DRV_05,EV_02,Tata Punch,City,Tech Park,Central Station,46.1,31.9,4,7,84,69.15,0,84.4
+LOG_000086,09-06-2026,USR_DRV_06,EV_10,Tata Punch,City,Central Station,Industrial Hub,64.1,30.2,10,5,76.6,96.15,0,76.8
+LOG_000087,09-06-2026,USR_DRV_07,EV_09,Tata Punch,City,City Mall,Tech Park,67.3,34.8,9,8,69.7,100.95,0,74.9
+LOG_000088,09-06-2026,USR_DRV_08,EV_02,Tata Punch,Highway,City Mall,Tech Park,123.9,63.5,1,0,62.9,185.85,0,98.7
+LOG_000089,09-06-2026,USR_DRV_09,EV_04,MG Windsor,Highway,Central Station,Industrial Hub,132.9,76.8,1,2,65.6,199.35,90.26,80.5
+LOG_000090,09-06-2026,USR_DRV_10,EV_01,MG Windsor,City,Industrial Hub,Tech Park,42,32.8,6,11,86.9,63,0,75
+LOG_000091,10-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,City,Central Station,City Mall,73.4,30.1,8,5,67.5,110.1,0,80
+LOG_000092,10-06-2026,USR_DRV_02,EV_06,Mahindra XUV 3XO EV,City,Airport Terminal 1,Tech Park,73.3,60.6,8,10,64,109.95,174.31,59.2
+LOG_000093,10-06-2026,USR_DRV_03,EV_04,MG Windsor,Highway,Tech Park,Central Station,156.2,87.2,2,1,46.3,234.3,0,94.3
+LOG_000094,10-06-2026,USR_DRV_04,EV_10,Tata Punch,Highway,Central Station,Industrial Hub,101.7,101.8,1,3,53.5,152.55,0,80.8
+LOG_000095,10-06-2026,USR_DRV_05,EV_09,Tata Punch,Highway,Central Station,Tech Park,156.6,79.3,2,1,45.5,234.9,0,95.9
+LOG_000096,10-06-2026,USR_DRV_06,EV_01,MG Windsor,Highway,Tech Park,Industrial Hub,114,69.1,0,3,68.6,171,0,94.7
+LOG_000097,10-06-2026,USR_DRV_07,EV_02,Tata Punch,City,City Mall,Industrial Hub,50.4,58.5,11,9,77.3,75.6,0,70.7
+LOG_000098,10-06-2026,USR_DRV_08,EV_02,Tata Punch,City,City Mall,Industrial Hub,81.6,25.5,7,4,75.6,122.4,0,82.7
+LOG_000099,10-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,City,Tech Park,City Mall,33.3,29.1,10,10,88.4,49.95,0,68.8
+LOG_000100,10-06-2026,USR_DRV_10,EV_02,Tata Punch,City,Central Station,City Mall,43.4,31,9,5,82.1,65.1,0,78.1
+LOG_000101,11-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Airport Terminal 1,73.4,46.4,7,13,67.5,110.1,0,70.1
+LOG_000102,11-06-2026,USR_DRV_02,EV_07,MG Windsor,City,Central Station,Tech Park,30.8,57.8,7,8,88.7,46.2,137.96,63.2
+LOG_000103,11-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,City,Central Station,Industrial Hub,54.7,41.3,10,9,74.7,82.05,232.96,57.2
+LOG_000104,11-06-2026,USR_DRV_04,EV_07,MG Windsor,Highway,City Mall,Central Station,107.3,100,1,3,62.9,160.95,0,83.2
+LOG_000105,11-06-2026,USR_DRV_05,EV_02,Tata Punch,City,Tech Park,Airport Terminal 1,33.6,29.6,8,7,88.3,50.4,0,79
+LOG_000106,11-06-2026,USR_DRV_06,EV_01,MG Windsor,Highway,City Mall,Industrial Hub,111.9,85.1,2,2,69.2,167.85,0,94.6
+LOG_000107,11-06-2026,USR_DRV_07,EV_08,Mahindra XUV 3XO EV,Highway,City Mall,Airport Terminal 1,149.7,108.9,1,3,31.6,224.55,0,74.3
+LOG_000108,11-06-2026,USR_DRV_08,EV_02,Tata Punch,Highway,Airport Terminal 1,Industrial Hub,108.1,72.4,0,0,67.7,162.15,0,100
+LOG_000109,11-06-2026,USR_DRV_09,EV_04,MG Windsor,City,Industrial Hub,Tech Park,66.9,32.2,10,10,82.7,100.35,0,71.2
+LOG_000110,11-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,Industrial Hub,Tech Park,142.2,93.1,0,2,41.2,213.3,0,89.4
+LOG_000111,12-06-2026,USR_DRV_01,EV_03,Tata Punch,Highway,Central Station,City Mall,168.9,105,2,4,26.3,253.35,0,75.4
+LOG_000112,12-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,Tech Park,31.6,41.1,13,14,84.5,47.4,235.12,43.4
+LOG_000113,12-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,Highway,Central Station,Tech Park,188.9,114.4,0,2,12.8,283.35,0,73.3
+LOG_000114,12-06-2026,USR_DRV_04,EV_02,Tata Punch,Highway,Tech Park,City Mall,193.2,102.7,0,0,11.6,289.8,0,86.2
+LOG_000115,12-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Tech Park,Industrial Hub,66.4,34.5,6,5,76.9,99.6,0,82.3
+LOG_000116,12-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Industrial Hub,59,31.8,5,11,78.2,88.5,162.73,62.3
+LOG_000117,12-06-2026,USR_DRV_07,EV_08,Mahindra XUV 3XO EV,Highway,Tech Park,City Mall,114.4,99,1,0,47.7,171.6,0,86.5
+LOG_000118,12-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,Highway,Central Station,Industrial Hub,203.4,56.7,0,2,38.2,305.1,0,97.2
+LOG_000119,12-06-2026,USR_DRV_09,EV_04,MG Windsor,Highway,City Mall,Tech Park,113.8,64.4,0,2,70.5,170.7,0,98
+LOG_000120,12-06-2026,USR_DRV_10,EV_01,MG Windsor,City,City Mall,Central Station,43.4,43.8,9,7,86.4,65.1,0,75.5
+LOG_000121,13-06-2026,USR_DRV_01,EV_01,MG Windsor,City,Central Station,Airport Terminal 1,59.2,34.7,11,7,80.5,88.8,0,73.4
+LOG_000122,13-06-2026,USR_DRV_02,EV_07,MG Windsor,City,Central Station,Tech Park,44.1,37.9,6,13,83.9,66.15,271.05,56.9
+LOG_000123,13-06-2026,USR_DRV_03,EV_04,MG Windsor,Highway,Industrial Hub,Tech Park,203.7,103.9,0,0,29.9,305.55,0,84.3
+LOG_000124,13-06-2026,USR_DRV_04,EV_10,Tata Punch,City,Tech Park,Central Station,47.1,44.3,5,12,78.5,70.65,238.93,60.6
+LOG_000125,13-06-2026,USR_DRV_05,EV_09,Tata Punch,Highway,City Mall,Central Station,154,83.8,1,1,46.4,231,0,96
+LOG_000126,13-06-2026,USR_DRV_06,EV_10,Tata Punch,Highway,Central Station,City Mall,217.9,70.1,1,0,20.6,326.85,0,100
+LOG_000127,13-06-2026,USR_DRV_07,EV_02,Tata Punch,City,Tech Park,City Mall,80.5,41.6,12,11,63.8,120.75,278.19,50
+LOG_000128,13-06-2026,USR_DRV_08,EV_02,Tata Punch,City,Industrial Hub,City Mall,45.6,34.4,7,8,86.4,68.4,0,77
+LOG_000129,13-06-2026,USR_DRV_09,EV_04,MG Windsor,City,Tech Park,City Mall,83.2,38.8,6,7,78.5,124.8,0,79.9
+LOG_000130,13-06-2026,USR_DRV_10,EV_01,MG Windsor,Highway,Airport Terminal 1,Central Station,177.5,88.8,1,1,44.5,266.25,0,93.1
+LOG_000131,14-06-2026,USR_DRV_01,EV_01,MG Windsor,City,Airport Terminal 1,Tech Park,38.5,37.7,11,9,87.3,57.75,0,70.7
+LOG_000132,14-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Airport Terminal 1,62.8,37.3,7,12,69.1,94.2,0,72.7
+LOG_000133,14-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,Highway,Central Station,Industrial Hub,143.7,106.7,3,2,33.6,215.55,0,76
+LOG_000134,14-06-2026,USR_DRV_04,EV_02,Tata Punch,City,Tech Park,Industrial Hub,79.7,36.4,11,10,63.5,119.55,0,69.3
+LOG_000135,14-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,Tech Park,196.2,68.2,0,2,30.7,294.3,0,97.2
+LOG_000136,14-06-2026,USR_DRV_06,EV_10,Tata Punch,City,Tech Park,Central Station,72,30.9,10,5,73.8,108,0,78.8
+LOG_000137,14-06-2026,USR_DRV_07,EV_08,Mahindra XUV 3XO EV,Highway,Tech Park,Central Station,149.8,95.9,1,1,31.5,224.7,0,87.4
+LOG_000138,14-06-2026,USR_DRV_08,EV_02,Tata Punch,City,Tech Park,Airport Terminal 1,37.6,25.7,8,7,88.8,56.4,199.91,62.3
+LOG_000139,14-06-2026,USR_DRV_09,EV_10,Tata Punch,City,Central Station,City Mall,41.9,26.2,10,8,85.7,62.85,0,73.8
+LOG_000140,14-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,Central Station,Airport Terminal 1,128.6,94.8,2,0,46.9,192.9,0,89.2
+LOG_000141,15-06-2026,USR_DRV_01,EV_03,Tata Punch,City,Industrial Hub,Airport Terminal 1,69.5,37.6,4,7,69.7,104.25,0,82.6
+LOG_000142,15-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,Tech Park,33.7,49.3,10,15,83.4,50.55,0,62.2
+LOG_000143,15-06-2026,USR_DRV_03,EV_04,MG Windsor,City,City Mall,Tech Park,44,30.8,12,8,84.9,66,0,70.4
+LOG_000144,15-06-2026,USR_DRV_04,EV_07,MG Windsor,Highway,Airport Terminal 1,Central Station,142.3,95.7,2,4,50.8,213.45,0,83.9
+LOG_000145,15-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,City,Airport Terminal 1,Central Station,69.4,45.1,3,5,75.5,104.1,0,89.2
+LOG_000146,15-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,Highway,Industrial Hub,City Mall,218.7,81.2,0,2,19.1,328.05,0,96.6
+LOG_000147,15-06-2026,USR_DRV_07,EV_08,Mahindra XUV 3XO EV,Highway,Tech Park,Central Station,195.9,97.1,1,2,10.5,293.85,0,85.3
+LOG_000148,15-06-2026,USR_DRV_08,EV_07,MG Windsor,Highway,City Mall,Tech Park,210.9,66.2,1,2,52.3,316.35,102.64,81.5
+LOG_000149,15-06-2026,USR_DRV_09,EV_04,MG Windsor,Highway,Tech Park,Central Station,109.6,79,0,2,71.6,164.4,0,97.6
+LOG_000150,15-06-2026,USR_DRV_10,EV_01,MG Windsor,Highway,Central Station,City Mall,173.8,89.1,2,3,45.7,260.7,119.18,73.9
+LOG_000151,16-06-2026,USR_DRV_01,EV_03,Tata Punch,City,Central Station,Tech Park,76.7,48.8,8,5,66.5,115.05,0,80.9
+LOG_000152,16-06-2026,USR_DRV_02,EV_06,Mahindra XUV 3XO EV,Highway,Industrial Hub,Central Station,172.6,112.3,3,1,15.2,258.9,0,72.4
+LOG_000153,16-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,Highway,City Mall,Tech Park,177.9,92.5,0,3,17.8,266.85,0,89.2
+LOG_000154,16-06-2026,USR_DRV_04,EV_07,MG Windsor,City,Tech Park,City Mall,68.7,37,10,11,76.2,103.05,0,67.6
+LOG_000155,16-06-2026,USR_DRV_05,EV_02,Tata Punch,City,City Mall,Airport Terminal 1,79.4,33.5,4,8,72.4,119.1,0,81.5
+LOG_000156,16-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,Tech Park,79,45,9,11,70.8,118.5,0,70.9
+LOG_000157,16-06-2026,USR_DRV_07,EV_02,Tata Punch,City,Central Station,Tech Park,73.6,37.1,9,8,66.9,110.4,0,74.4
+LOG_000158,16-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,Central Station,33.6,27.9,7,6,89.8,50.4,0,80.2
+LOG_000159,16-06-2026,USR_DRV_09,EV_04,MG Windsor,City,Airport Terminal 1,City Mall,65.3,33.1,8,6,83.1,97.95,0,79.8
+LOG_000160,16-06-2026,USR_DRV_10,EV_04,MG Windsor,City,Airport Terminal 1,Industrial Hub,57.7,51.5,11,8,82,86.55,179.17,57.8
+LOG_000161,17-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,Highway,Industrial Hub,Tech Park,201.5,88.8,2,2,10.7,302.25,0,90.4
+LOG_000162,17-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,Airport Terminal 1,62.5,51,6,11,69.3,93.75,0,74
+LOG_000163,17-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,City,Central Station,Airport Terminal 1,32.5,49.8,10,11,85,48.75,0,68.2
+LOG_000164,17-06-2026,USR_DRV_04,EV_07,MG Windsor,City,City Mall,Tech Park,65.3,39.7,7,12,77.4,97.95,0,71.4
+LOG_000165,17-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Airport Terminal 1,Industrial Hub,52.9,34,6,4,81.6,79.35,0,84.5
+LOG_000166,17-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,City Mall,161.8,70.6,0,0,40.1,242.7,0,98.9
+LOG_000167,17-06-2026,USR_DRV_07,EV_08,Mahindra XUV 3XO EV,Highway,City Mall,Industrial Hub,129.8,110,0,1,40.7,194.7,0,77.9
+LOG_000168,17-06-2026,USR_DRV_08,EV_07,MG Windsor,Highway,Industrial Hub,City Mall,159.9,62,0,3,63.8,239.85,0,96.9
+LOG_000169,17-06-2026,USR_DRV_09,EV_10,Tata Punch,Highway,Central Station,Airport Terminal 1,133.8,77.6,2,2,54.2,200.7,0,92.5
+LOG_000170,17-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,Airport Terminal 1,City Mall,187.3,98.2,1,1,22.6,280.95,0,85.5
+LOG_000171,18-06-2026,USR_DRV_01,EV_03,Tata Punch,Highway,Central Station,Industrial Hub,160.5,103.7,0,4,30,240.75,0,77.9
+LOG_000172,18-06-2026,USR_DRV_02,EV_07,MG Windsor,Highway,Tech Park,City Mall,166.9,102.2,0,3,38.9,250.35,0,80.4
+LOG_000173,18-06-2026,USR_DRV_03,EV_03,Tata Punch,City,Tech Park,Industrial Hub,58.6,34.8,13,6,73.3,87.9,0,71
+LOG_000174,18-06-2026,USR_DRV_04,EV_10,Tata Punch,Highway,Industrial Hub,Tech Park,160.9,100.9,1,2,26.4,241.35,0,81.3
+LOG_000175,18-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,City,City Mall,Tech Park,73.8,40,8,3,73.9,110.7,0,84.9
+LOG_000176,18-06-2026,USR_DRV_06,EV_01,MG Windsor,City,Central Station,Industrial Hub,39.4,39.6,8,10,89.1,59.1,228.14,56.6
+LOG_000177,18-06-2026,USR_DRV_07,EV_02,Tata Punch,City,Airport Terminal 1,Central Station,54.3,42.6,8,6,75.6,81.45,0,79.3
+LOG_000178,18-06-2026,USR_DRV_08,EV_02,Tata Punch,City,Airport Terminal 1,Tech Park,60.8,39.8,6,5,81.8,91.2,0,83.4
+LOG_000179,18-06-2026,USR_DRV_09,EV_04,MG Windsor,Highway,Industrial Hub,Tech Park,181.1,83.7,1,2,53.1,271.65,0,95.5
+LOG_000180,18-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,Industrial Hub,Tech Park,127,104,0,1,47.5,190.5,0,84
+LOG_000181,19-06-2026,USR_DRV_01,EV_01,MG Windsor,Highway,Tech Park,City Mall,134.5,98.2,1,4,55.6,201.75,0,81.5
+LOG_000182,19-06-2026,USR_DRV_02,EV_07,MG Windsor,Highway,Central Station,City Mall,214.6,92.9,3,3,21.4,321.9,0,83.8
+LOG_000183,19-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,Highway,Industrial Hub,Tech Park,116.5,103.6,2,1,46.2,174.75,0,80.7
+LOG_000184,19-06-2026,USR_DRV_04,EV_07,MG Windsor,City,Central Station,Airport Terminal 1,52.7,52.4,5,12,81.8,79.05,206.31,60.8
+LOG_000185,19-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,Highway,City Mall,Airport Terminal 1,190.7,71.6,0,0,32.6,286.05,0,100
+LOG_000186,19-06-2026,USR_DRV_06,EV_10,Tata Punch,City,Airport Terminal 1,Industrial Hub,78.5,28.6,11,11,71.4,117.75,0,67
+LOG_000187,19-06-2026,USR_DRV_07,EV_02,Tata Punch,Highway,Central Station,Airport Terminal 1,135.8,102.1,3,1,38.9,203.7,0,80.7
+LOG_000188,19-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,Industrial Hub,132.7,72,0,2,59.7,199.05,0,97.7
+LOG_000189,19-06-2026,USR_DRV_09,EV_10,Tata Punch,Highway,Tech Park,Airport Terminal 1,121.1,83.5,2,3,58.5,181.65,0,91.3
+LOG_000190,19-06-2026,USR_DRV_10,EV_04,MG Windsor,City,Airport Terminal 1,Tech Park,56.3,53.3,4,7,82.4,84.45,0,82.8
+LOG_000191,20-06-2026,USR_DRV_01,EV_01,MG Windsor,Highway,Industrial Hub,Central Station,131.4,91.9,0,3,56.6,197.1,0,88.9
+LOG_000192,20-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,Highway,Central Station,City Mall,144.1,97.5,3,2,29.2,216.15,0,84
+LOG_000193,20-06-2026,USR_DRV_03,EV_04,MG Windsor,Highway,Industrial Hub,City Mall,190.9,109.2,3,3,34.3,286.35,0,71.9
+LOG_000194,20-06-2026,USR_DRV_04,EV_02,Tata Punch,Highway,Industrial Hub,Tech Park,109.4,102.6,0,2,50,164.1,0,83.1
+LOG_000195,20-06-2026,USR_DRV_05,EV_02,Tata Punch,City,Tech Park,Industrial Hub,36.4,28,8,4,87.3,54.6,0,82.9
+LOG_000196,20-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,City Mall,55.1,25.7,7,10,79.6,82.65,0,74.2
+LOG_000197,20-06-2026,USR_DRV_07,EV_08,Mahindra XUV 3XO EV,City,Industrial Hub,Central Station,32.5,40.4,5,14,85.1,48.75,0,70.2
+LOG_000198,20-06-2026,USR_DRV_08,EV_02,Tata Punch,City,Tech Park,Industrial Hub,39.9,22.6,7,7,88.1,59.85,0,78.6
+LOG_000199,20-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,Highway,City Mall,Industrial Hub,109.6,85.9,2,0,61.9,164.4,0,95.1
+LOG_000200,20-06-2026,USR_DRV_10,EV_04,MG Windsor,Highway,Industrial Hub,Airport Terminal 1,187.3,83.3,0,0,41.5,280.95,0,100
+LOG_000201,21-06-2026,USR_DRV_01,EV_03,Tata Punch,Highway,Industrial Hub,City Mall,198.8,88.7,1,1,13.2,298.2,0,94.7
+LOG_000202,21-06-2026,USR_DRV_02,EV_07,MG Windsor,City,City Mall,Central Station,43.2,34.5,11,9,84.2,64.8,0,71.1
+LOG_000203,21-06-2026,USR_DRV_03,EV_03,Tata Punch,City,City Mall,Industrial Hub,42.9,36.9,13,5,80.5,64.35,0,72.4
+LOG_000204,21-06-2026,USR_DRV_04,EV_07,MG Windsor,Highway,Industrial Hub,Tech Park,128.4,112.1,3,2,55.6,192.6,0,70.1
+LOG_000205,21-06-2026,USR_DRV_05,EV_09,Tata Punch,City,City Mall,Industrial Hub,32.6,31.2,8,6,88.7,48.9,0,79.6
+LOG_000206,21-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Industrial Hub,40.1,37.4,5,5,85.2,60.15,0,83.9
+LOG_000207,21-06-2026,USR_DRV_07,EV_09,Tata Punch,City,Industrial Hub,City Mall,83.2,46.7,6,7,62.5,124.8,182.14,66.8
+LOG_000208,21-06-2026,USR_DRV_08,EV_02,Tata Punch,City,Industrial Hub,Airport Terminal 1,32.8,27.5,7,3,90.2,49.2,154.2,70.3
+LOG_000209,21-06-2026,USR_DRV_09,EV_04,MG Windsor,City,City Mall,Airport Terminal 1,77.8,30.4,10,3,79.9,116.7,0,81.9
+LOG_000210,21-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,Airport Terminal 1,Tech Park,147.6,83.7,1,1,39,221.4,0,97.4
+LOG_000211,22-06-2026,USR_DRV_01,EV_01,MG Windsor,Highway,Tech Park,Industrial Hub,155.9,104.8,2,3,48.6,233.85,0,75.7
+LOG_000212,22-06-2026,USR_DRV_02,EV_06,Mahindra XUV 3XO EV,Highway,Central Station,Tech Park,189,90.9,2,3,7.1,283.5,0,87.2
+LOG_000213,22-06-2026,USR_DRV_03,EV_03,Tata Punch,Highway,Airport Terminal 1,Industrial Hub,168.4,92.4,2,4,23.4,252.6,0,85.9
+LOG_000214,22-06-2026,USR_DRV_04,EV_10,Tata Punch,Highway,City Mall,Airport Terminal 1,187.9,96.1,0,2,14,281.85,0,89.3
+LOG_000215,22-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Industrial Hub,Central Station,76.1,24.9,9,4,73.5,114.15,137.38,65.9
+LOG_000216,22-06-2026,USR_DRV_06,EV_10,Tata Punch,City,Central Station,Tech Park,57.8,33.4,8,9,78.9,86.7,0,74.4
+LOG_000217,22-06-2026,USR_DRV_07,EV_09,Tata Punch,City,Central Station,Industrial Hub,30.7,45.9,7,14,86.2,46.05,274.02,54
+LOG_000218,22-06-2026,USR_DRV_08,EV_07,MG Windsor,City,Central Station,Tech Park,43.3,32.3,4,5,90.2,64.95,0,85.2
+LOG_000219,22-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,Highway,Industrial Hub,Airport Terminal 1,218.8,69.1,1,3,23.9,328.2,0,95.1
+LOG_000220,22-06-2026,USR_DRV_10,EV_02,Tata Punch,City,City Mall,Industrial Hub,50.7,40.7,10,10,79,76.05,270.8,55.4
+LOG_000221,23-06-2026,USR_DRV_01,EV_01,MG Windsor,City,Industrial Hub,Central Station,42.6,55.3,11,9,85.9,63.9,279.1,55.6
+LOG_000222,23-06-2026,USR_DRV_02,EV_06,Mahindra XUV 3XO EV,City,Airport Terminal 1,City Mall,30.9,39,6,13,84.8,46.35,0,72.8
+LOG_000223,23-06-2026,USR_DRV_03,EV_04,MG Windsor,City,Industrial Hub,Airport Terminal 1,61.2,56.1,11,10,78.9,91.8,0,69.2
+LOG_000224,23-06-2026,USR_DRV_04,EV_07,MG Windsor,City,Industrial Hub,Tech Park,33,43.8,13,8,88.6,49.5,0,69.9
+LOG_000225,23-06-2026,USR_DRV_05,EV_06,Mahindra XUV 3XO EV,Highway,Central Station,City Mall,194,75.4,0,2,31.5,291,0,96.1
+LOG_000226,23-06-2026,USR_DRV_06,EV_01,MG Windsor,Highway,Central Station,City Mall,195.8,85.4,0,0,46,293.7,0,100
+LOG_000227,23-06-2026,USR_DRV_07,EV_02,Tata Punch,Highway,Tech Park,City Mall,112.8,84.2,1,1,49.2,169.2,0,95.9
+LOG_000228,23-06-2026,USR_DRV_08,EV_07,MG Windsor,Highway,City Mall,Industrial Hub,112.4,57.6,1,1,74.6,168.6,0,98.1
+LOG_000229,23-06-2026,USR_DRV_09,EV_10,Tata Punch,Highway,City Mall,Industrial Hub,193.5,80.5,1,3,33.7,290.25,0,94.1
+LOG_000230,23-06-2026,USR_DRV_10,EV_04,MG Windsor,Highway,Airport Terminal 1,Tech Park,132.3,84.5,0,0,58.7,198.45,0,99.4
+LOG_000231,24-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,Highway,Tech Park,Airport Terminal 1,186.5,95.9,2,2,17.4,279.75,0,83.8
+LOG_000232,24-06-2026,USR_DRV_02,EV_06,Mahindra XUV 3XO EV,Highway,Industrial Hub,City Mall,196.5,101,1,4,3.4,294.75,0,81.1
+LOG_000233,24-06-2026,USR_DRV_03,EV_03,Tata Punch,Highway,Tech Park,Airport Terminal 1,157.5,90.3,1,1,28.3,236.25,0,93.1
+LOG_000234,24-06-2026,USR_DRV_04,EV_07,MG Windsor,City,Tech Park,Industrial Hub,45.4,54.5,8,13,84.3,68.1,300.72,52.5
+LOG_000235,24-06-2026,USR_DRV_05,EV_09,Tata Punch,City,City Mall,Airport Terminal 1,54.1,30,8,9,81.2,81.15,0,74.2
+LOG_000236,24-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Airport Terminal 1,43.9,28,7,6,83.8,65.85,0,80.8
+LOG_000237,24-06-2026,USR_DRV_07,EV_02,Tata Punch,Highway,Industrial Hub,City Mall,165.2,107.8,1,4,25.6,247.8,0,74.7
+LOG_000238,24-06-2026,USR_DRV_08,EV_07,MG Windsor,City,Airport Terminal 1,City Mall,39.1,32.2,6,7,91.2,58.65,0,81.9
+LOG_000239,24-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,Highway,Central Station,Airport Terminal 1,111.8,69,2,2,61.1,167.7,0,93.2
+LOG_000240,24-06-2026,USR_DRV_10,EV_01,MG Windsor,Highway,City Mall,Airport Terminal 1,141.4,77.8,0,1,55.8,212.1,0,97.3
+LOG_000241,25-06-2026,USR_DRV_01,EV_03,Tata Punch,City,Tech Park,City Mall,48.9,51.9,9,7,78.7,73.35,213.73,60.9
+LOG_000242,25-06-2026,USR_DRV_02,EV_07,MG Windsor,Highway,Central Station,Airport Terminal 1,102.7,101.5,0,4,62.4,154.05,0,81.6
+LOG_000243,25-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,City,Industrial Hub,Airport Terminal 1,48.2,43.3,9,12,77.7,72.3,0,67.6
+LOG_000244,25-06-2026,USR_DRV_04,EV_07,MG Windsor,Highway,City Mall,Central Station,188.5,112.3,1,2,34.8,282.75,84.77,58
+LOG_000245,25-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Industrial Hub,Central Station,74,35.7,6,5,74.2,111,162.63,68.5
+LOG_000246,25-06-2026,USR_DRV_06,EV_01,MG Windsor,Highway,Industrial Hub,City Mall,173.4,82.3,1,3,52.2,260.1,0,94.9
+LOG_000247,25-06-2026,USR_DRV_07,EV_02,Tata Punch,Highway,Industrial Hub,Central Station,180.7,93.4,0,0,18.7,271.05,0,92.2
+LOG_000248,25-06-2026,USR_DRV_08,EV_02,Tata Punch,Highway,Industrial Hub,Airport Terminal 1,169,64.3,1,1,49.5,253.5,0,98.3
+LOG_000249,25-06-2026,USR_DRV_09,EV_10,Tata Punch,City,City Mall,Tech Park,37.7,30,6,4,87.1,56.55,0,83.5
+LOG_000250,25-06-2026,USR_DRV_10,EV_02,Tata Punch,City,City Mall,Industrial Hub,52.5,41.1,10,8,78.3,78.75,217.28,58.9
+LOG_000251,26-06-2026,USR_DRV_01,EV_05,Mahindra XUV 3XO EV,Highway,Central Station,City Mall,127,89.9,2,2,43.7,190.5,0,90.1
+LOG_000252,26-06-2026,USR_DRV_02,EV_05,Mahindra XUV 3XO EV,City,Industrial Hub,Central Station,44.7,49.8,15,10,78,67.05,0,63.3
+LOG_000253,26-06-2026,USR_DRV_03,EV_04,MG Windsor,City,City Mall,Central Station,70.5,50.2,7,13,75.7,105.75,200.44,56.1
+LOG_000254,26-06-2026,USR_DRV_04,EV_02,Tata Punch,Highway,Central Station,Tech Park,125.2,107.9,2,4,42.7,187.8,0,72.5
+LOG_000255,26-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Airport Terminal 1,Tech Park,74.3,36.4,7,8,74.1,111.45,232.81,61.9
+LOG_000256,26-06-2026,USR_DRV_06,EV_01,MG Windsor,Highway,Industrial Hub,Central Station,116.3,86.3,1,0,67.9,174.45,0,98
+LOG_000257,26-06-2026,USR_DRV_07,EV_02,Tata Punch,City,Airport Terminal 1,Tech Park,69.1,54.9,12,11,68.9,103.65,0,65.7
+LOG_000258,26-06-2026,USR_DRV_08,EV_02,Tata Punch,Highway,City Mall,Industrial Hub,109.1,71.7,1,1,67.4,163.65,0,97.6
+LOG_000259,26-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,Highway,City Mall,Tech Park,169.8,83.8,2,0,41,254.7,0,97.4
+LOG_000260,26-06-2026,USR_DRV_10,EV_04,MG Windsor,Highway,Central Station,Industrial Hub,126.1,89,0,1,60.6,189.15,0,94.8
+LOG_000261,27-06-2026,USR_DRV_01,EV_03,Tata Punch,City,Industrial Hub,City Mall,73.4,55.1,11,5,68,110.1,0,77
+LOG_000262,27-06-2026,USR_DRV_02,EV_07,MG Windsor,City,Airport Terminal 1,Industrial Hub,55.1,64.3,9,15,79.8,82.65,0,65.1
+LOG_000263,27-06-2026,USR_DRV_03,EV_04,MG Windsor,City,Tech Park,Central Station,66,37.9,8,13,77.3,99,225.15,52.9
+LOG_000264,27-06-2026,USR_DRV_04,EV_07,MG Windsor,City,City Mall,Central Station,68.7,30.5,9,6,76.2,103.05,202.74,61
+LOG_000265,27-06-2026,USR_DRV_05,EV_09,Tata Punch,Highway,Central Station,Industrial Hub,183.3,76,0,0,36.2,274.95,0,98.8
+LOG_000266,27-06-2026,USR_DRV_06,EV_05,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,Industrial Hub,192.8,86.3,0,3,28.7,289.2,0,94.5
+LOG_000267,27-06-2026,USR_DRV_07,EV_08,Mahindra XUV 3XO EV,City,City Mall,Tech Park,69.7,48.9,6,8,68.1,104.55,0,80.1
+LOG_000268,27-06-2026,USR_DRV_08,EV_07,MG Windsor,City,Airport Terminal 1,Central Station,62.4,27.6,9,5,85.9,93.6,155.23,62.8
+LOG_000269,27-06-2026,USR_DRV_09,EV_04,MG Windsor,Highway,Central Station,City Mall,124.7,77.8,0,1,67.7,187.05,0,99.4
+LOG_000270,27-06-2026,USR_DRV_10,EV_02,Tata Punch,Highway,City Mall,Central Station,128.9,94.7,0,3,46.7,193.35,82.04,72.2
+LOG_000271,28-06-2026,USR_DRV_01,EV_01,MG Windsor,Highway,Tech Park,Airport Terminal 1,191.5,109.2,2,0,36.8,287.25,79.32,61.2
+LOG_000272,28-06-2026,USR_DRV_02,EV_07,MG Windsor,Highway,Industrial Hub,Tech Park,175.4,106.6,1,3,35.8,263.1,103.83,62.1
+LOG_000273,28-06-2026,USR_DRV_03,EV_04,MG Windsor,City,Tech Park,Central Station,58.1,36.5,12,10,80,87.15,0,67.4
+LOG_000274,28-06-2026,USR_DRV_04,EV_07,MG Windsor,City,Tech Park,Industrial Hub,70.1,56.3,5,5,75.8,105.15,0,84.9
+LOG_000275,28-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Tech Park,Airport Terminal 1,36.6,39.6,8,4,87.3,54.9,0,82.1
+LOG_000276,28-06-2026,USR_DRV_06,EV_01,MG Windsor,Highway,Airport Terminal 1,City Mall,115.2,87,0,3,68.2,172.8,0,92.5
+LOG_000277,28-06-2026,USR_DRV_07,EV_09,Tata Punch,Highway,Industrial Hub,Central Station,131.6,113.3,2,2,40.8,197.4,0,70
+LOG_000278,28-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,City,Tech Park,Airport Terminal 1,44,22,6,7,86.6,66,0,80.5
+LOG_000279,28-06-2026,USR_DRV_09,EV_10,Tata Punch,City,Airport Terminal 1,Central Station,55.9,31.6,4,10,80.9,83.85,0,79.2
+LOG_000280,28-06-2026,USR_DRV_10,EV_04,MG Windsor,Highway,Airport Terminal 1,City Mall,129.8,102.4,1,3,59.4,194.7,0,79
+LOG_000281,29-06-2026,USR_DRV_01,EV_03,Tata Punch,City,Airport Terminal 1,Tech Park,74.2,57.7,13,5,67.6,111.3,0,72.3
+LOG_000282,29-06-2026,USR_DRV_02,EV_06,Mahindra XUV 3XO EV,Highway,Central Station,Industrial Hub,101,96.9,2,1,50.4,151.5,0,85.9
+LOG_000283,29-06-2026,USR_DRV_03,EV_06,Mahindra XUV 3XO EV,Highway,Airport Terminal 1,Tech Park,118.1,113.2,0,2,45.5,177.15,0,75
+LOG_000284,29-06-2026,USR_DRV_04,EV_02,Tata Punch,Highway,Central Station,Industrial Hub,201.9,107.6,0,2,7.6,302.85,0,78.9
+LOG_000285,29-06-2026,USR_DRV_05,EV_02,Tata Punch,City,Tech Park,Central Station,32.4,28.6,9,6,88.7,48.6,0,77.4
+LOG_000286,29-06-2026,USR_DRV_06,EV_01,MG Windsor,City,Industrial Hub,Central Station,57.8,39.8,6,8,84.1,86.7,189.25,62.9
+LOG_000287,29-06-2026,USR_DRV_07,EV_09,Tata Punch,Highway,Tech Park,Industrial Hub,184.1,106.1,1,1,17.1,276.15,76.57,66
+LOG_000288,29-06-2026,USR_DRV_08,EV_05,Mahindra XUV 3XO EV,City,Airport Terminal 1,Central Station,39,29.2,5,6,88.2,58.5,0,82.6
+LOG_000289,29-06-2026,USR_DRV_09,EV_06,Mahindra XUV 3XO EV,Highway,Tech Park,Central Station,110.9,82.4,0,2,61.4,166.35,0,96.1
+LOG_000290,29-06-2026,USR_DRV_10,EV_01,MG Windsor,City,Central Station,Tech Park,83.3,38.5,4,7,74,124.95,0,82.5
+LOG_000291,30-06-2026,USR_DRV_01,EV_01,MG Windsor,Highway,Industrial Hub,Airport Terminal 1,111.4,84.4,2,0,63.2,167.1,81.21,81.2
+LOG_000292,30-06-2026,USR_DRV_02,EV_07,MG Windsor,Highway,Tech Park,Central Station,169.9,98.7,3,0,37.8,254.85,106.57,69.3
+LOG_000293,30-06-2026,USR_DRV_03,EV_03,Tata Punch,City,Tech Park,Central Station,32.3,44.3,6,10,85.3,48.45,0,75.7
+LOG_000294,30-06-2026,USR_DRV_04,EV_02,Tata Punch,Highway,City Mall,Airport Terminal 1,142.5,113.1,1,2,34.8,213.75,0,73.4
+LOG_000295,30-06-2026,USR_DRV_05,EV_09,Tata Punch,City,Tech Park,Industrial Hub,52.7,36,4,5,81.7,79.05,111.09,72.7
+LOG_000296,30-06-2026,USR_DRV_06,EV_01,MG Windsor,City,Industrial Hub,Central Station,84.4,43.3,6,8,76.7,126.6,0,80.2
+LOG_000297,30-06-2026,USR_DRV_07,EV_02,Tata Punch,Highway,City Mall,Tech Park,121.6,93.6,0,4,45.3,182.4,0,85.8
+LOG_000298,30-06-2026,USR_DRV_08,EV_02,Tata Punch,Highway,Industrial Hub,Airport Terminal 1,216.9,57.8,1,0,35.1,325.35,0,99.8
+LOG_000299,30-06-2026,USR_DRV_09,EV_10,Tata Punch,City,Industrial Hub,City Mall,49.5,42,9,4,83,74.25,0,81.4
+LOG_000300,30-06-2026,USR_DRV_10,EV_04,MG Windsor,Highway,Industrial Hub,Central Station,184.4,86.8,1,0,42.4,276.6,0,98
