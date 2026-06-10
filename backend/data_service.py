@@ -216,3 +216,37 @@ def get_driver_dashboard_stats(driver_id):
         "harsh_events_breakdown": harsh_events_breakdown,
         "mode_distribution": mode_dist
     }
+
+def get_admin_brands_stats():
+    df = get_dataframe()
+    
+    # 3-Month stats for income history
+    df['timestamp_dt'] = pd.to_datetime(df['timestamp'])
+    max_date = df['timestamp_dt'].max()
+    three_months_ago = max_date - pd.Timedelta(days=90)
+    last_3m_df = df[df['timestamp_dt'] >= three_months_ago].copy()
+    
+    # Aggregate by manufacturer
+    grouped = df.groupby('manufacturer').agg(
+        total_vehicles=('vehicle_id', 'nunique'),
+        total_income=('daily_income', 'sum'),
+        total_distance=('daily_distance_km', 'sum'),
+        avg_health=('initial_battery_health_pct', 'mean')
+    ).reset_index()
+    
+    grouped['total_income'] = grouped['total_income'].round(2)
+    grouped['total_distance'] = grouped['total_distance'].round(1)
+    grouped['avg_health'] = grouped['avg_health'].round(1)
+    
+    # Calculate daily income history per brand
+    history_df = last_3m_df.groupby(['manufacturer', 'date'])['daily_income'].sum().reset_index()
+    history_df['daily_income'] = history_df['daily_income'].round(2)
+    history_dict = {}
+    for brand, group in history_df.groupby('manufacturer'):
+        history_dict[brand] = group[['date', 'daily_income']].sort_values('date').to_dict(orient='records')
+        
+    brands_list = grouped.sort_values('total_vehicles', ascending=False).to_dict(orient='records')
+    for b in brands_list:
+        b['history'] = history_dict.get(b['manufacturer'], [])
+        
+    return brands_list

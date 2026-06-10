@@ -88,6 +88,12 @@ def read_admin_drivers(current_user: models.User = Depends(get_current_user)):
         raise HTTPException(status_code=403, detail="Not authorized")
     return data_service.get_admin_drivers_stats()
 
+@app.get("/admin/brands")
+def read_admin_brands(current_user: models.User = Depends(get_current_user)):
+    if current_user.role != 'admin':
+        raise HTTPException(status_code=403, detail="Not authorized")
+    return data_service.get_admin_brands_stats()
+
 @app.get("/driver/dashboard")
 def read_driver_dashboard(current_user: models.User = Depends(get_current_user)):
     if current_user.role != 'driver' or not current_user.driver_id:

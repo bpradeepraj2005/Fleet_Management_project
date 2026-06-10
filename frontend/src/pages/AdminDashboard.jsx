@@ -18,22 +18,26 @@ const AdminDashboard = () => {
   const [data, setData] = useState(null);
   const [vehicles, setVehicles] = useState([]);
   const [drivers, setDrivers] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [selectedDriver, setSelectedDriver] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const [dashRes, vehRes, drivRes] = await Promise.all([
+        const [dashRes, vehRes, drivRes, brandRes] = await Promise.all([
           axios.get('http://localhost:8001/admin/dashboard', { headers: { Authorization: `Bearer ${token}` } }),
           axios.get('http://localhost:8001/admin/vehicles', { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get('http://localhost:8001/admin/drivers', { headers: { Authorization: `Bearer ${token}` } })
+          axios.get('http://localhost:8001/admin/drivers', { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get('http://localhost:8001/admin/brands', { headers: { Authorization: `Bearer ${token}` } })
         ]);
         setData(dashRes.data);
         setVehicles(vehRes.data);
         setDrivers(drivRes.data);
+        setBrands(brandRes.data);
       } catch (err) {
         console.error(err);
       }
@@ -41,7 +45,7 @@ const AdminDashboard = () => {
     fetchData();
   }, []);
 
-  if (!data || !vehicles.length || !drivers.length) return <div className="app-container items-center justify-center">Loading...</div>;
+  if (!data || !vehicles.length || !drivers.length || !brands.length) return <div className="app-container items-center justify-center">Loading...</div>;
 
   // Visual Processing
   const topDrivers = [...drivers].sort((a, b) => b.total_income - a.total_income).slice(0, 5);
@@ -93,6 +97,9 @@ const AdminDashboard = () => {
           </button>
           <button onClick={() => setActiveTab('drivers')} className={`nav-item ${activeTab === 'drivers' ? 'active' : ''}`}>
             <Users size={20} /> Drivers Analytics
+          </button>
+          <button onClick={() => setActiveTab('brands')} className={`nav-item ${activeTab === 'brands' ? 'active' : ''}`}>
+            <Award size={20} /> Brands Analytics
           </button>
         </nav>
         <button onClick={toggleTheme} className="nav-item">
@@ -353,6 +360,94 @@ const AdminDashboard = () => {
                         <td style={{ color: 'var(--success)', fontWeight: 'bold' }}>${d.total_income.toLocaleString()}</td>
                         <td><span style={{ color: d.total_harsh_events > 15 ? 'var(--danger)' : 'var(--text-secondary)' }}>{d.total_harsh_events}</span></td>
                         <td><span className={`badge ${d.avg_performance > 80 ? 'badge-success' : 'badge-warning'}`}>{d.avg_performance}</span></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'brands' && (
+          <div className="animate-fade-in-up">
+            <h1 className="mb-8">Brand Analytics & Performance</h1>
+            
+            {selectedBrand ? (
+              <div className="glass-card mb-8 animate-fade-in-up hover-scale">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Award color="var(--accent-primary)" /> {selectedBrand.manufacturer}</h3>
+                  <button onClick={() => setSelectedBrand(null)} style={{ background: 'transparent', border: '1px solid var(--glass-border)', color: 'var(--text-secondary)', padding: '6px 16px', borderRadius: '4px', cursor: 'pointer' }}>Close</button>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
+                    <p className="input-label mb-1">Total Vehicles</p>
+                    <h4 style={{ color: 'var(--accent-primary)' }}>{selectedBrand.total_vehicles}</h4>
+                  </div>
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
+                    <p className="input-label mb-1">Total Income</p>
+                    <h4 style={{ color: 'var(--success)' }}>${selectedBrand.total_income?.toLocaleString() || 0}</h4>
+                  </div>
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
+                    <p className="input-label mb-1">Total Distance</p>
+                    <h4 style={{ color: 'var(--text-primary)' }}>{selectedBrand.total_distance?.toLocaleString() || 0} km</h4>
+                  </div>
+                  <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
+                    <p className="input-label mb-1">Avg Battery Health</p>
+                    <h4 style={{ color: selectedBrand.avg_health > 93 ? 'var(--success)' : 'var(--warning)' }}>{selectedBrand.avg_health || 0}%</h4>
+                  </div>
+                </div>
+
+                <h4 className="mb-4" style={{ color: 'var(--text-secondary)' }}>Income History (Last 3 Months)</h4>
+                <div style={{ height: '250px' }}>
+                  <ResponsiveContainer>
+                    <AreaChart data={selectedBrand.history || []}>
+                      <defs>
+                        <linearGradient id="colorBrandIncome" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#34d399" stopOpacity={0.4}/>
+                          <stop offset="95%" stopColor="#34d399" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border)" vertical={false} />
+                      <XAxis dataKey="date" stroke="var(--text-secondary)" tick={{fontSize: 12}} />
+                      <YAxis stroke="var(--text-secondary)" tick={{fontSize: 12}} label={{ value: 'Daily Income ($)', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)' }} />
+                      <Tooltip contentStyle={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--glass-border)', borderRadius: '8px' }} />
+                      <Area type="monotone" dataKey="daily_income" name="Income" stroke="#34d399" fillOpacity={1} fill="url(#colorBrandIncome)" animationDuration={1000} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            ) : (
+              <div className="glass-card mb-8 animate-fade-in-up stagger-2 hover-scale">
+                <h3 className="mb-4 flex items-center gap-2"><TrendingUp color="#8b5cf6" /> Brand Fleet Size</h3>
+                <div style={{ height: '300px' }}>
+                  <ResponsiveContainer>
+                    <BarChart data={brands.slice(0, 10)}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border)" vertical={false} />
+                      <XAxis dataKey="manufacturer" stroke="var(--text-secondary)" tick={{fontSize: 12}} label={{ value: 'Manufacturer', position: 'insideBottom', offset: -10, fill: 'var(--text-secondary)' }} />
+                      <YAxis stroke="var(--text-secondary)" tick={{fontSize: 12}} label={{ value: 'Total Vehicles', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12, style: {textAnchor: 'middle'} }} />
+                      <Tooltip contentStyle={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--glass-border)', borderRadius: '8px' }} />
+                      <Bar dataKey="total_vehicles" name="Vehicles" fill="#8b5cf6" radius={[4, 4, 0, 0]} animationDuration={1500} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            )}
+
+            <div className="glass-card animate-fade-in-up stagger-3 hover-scale">
+              <div className="table-container">
+                <table>
+                  <thead>
+                    <tr><th>Manufacturer</th><th>Total Vehicles</th><th>Total Distance</th><th>Total Revenue</th><th>Avg Battery Health</th></tr>
+                  </thead>
+                  <tbody>
+                    {brands.map((b, i) => (
+                      <tr key={i} onClick={() => setSelectedBrand(b)} style={{ cursor: 'pointer' }} className="hover-row">
+                        <td style={{ fontWeight: 'bold' }}>{b.manufacturer}</td>
+                        <td>{b.total_vehicles}</td>
+                        <td>{b.total_distance.toLocaleString()} km</td>
+                        <td style={{ color: 'var(--success)', fontWeight: 'bold' }}>${b.total_income.toLocaleString()}</td>
+                        <td><span className={`badge ${b.avg_health > 93 ? 'badge-success' : 'badge-warning'}`}>{b.avg_health}%</span></td>
                       </tr>
                     ))}
                   </tbody>
