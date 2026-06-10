@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import { LogOut, Battery, Map, Navigation, Activity, TrendingUp, DollarSign, Route, Sun, Moon, AlertTriangle } from 'lucide-react';
+import { LogOut, Battery, Map, Navigation, Activity, TrendingUp, IndianRupee as DollarSign, Route, Sun, Moon, AlertTriangle } from 'lucide-react';
 import { 
   ComposedChart, AreaChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, PieChart, Pie, Cell, Legend 
@@ -14,6 +14,7 @@ const DriverDashboard = () => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [data, setData] = useState(null);
+  const [activeTab, setActiveTab] = useState('stats');
   
   // ML Predictor state
   const [mlInput, setMlInput] = useState({
@@ -87,8 +88,9 @@ const DriverDashboard = () => {
         </div>
         
         <nav className="flex-col gap-2" style={{ flex: 1, marginTop: '32px' }}>
-          <a href="#" className="nav-item active"><Activity size={20} /> My Stats</a>
-          <a href="#ml" className="nav-item"><Battery size={20} /> Range Predictor</a>
+          <button onClick={() => setActiveTab('stats')} className={`nav-item ${activeTab === 'stats' ? 'active' : ''}`}><Activity size={20} /> My Stats</button>
+          <button onClick={() => setActiveTab('ml')} className={`nav-item ${activeTab === 'ml' ? 'active' : ''}`}><Battery size={20} /> Range Predictor</button>
+          <button onClick={() => setActiveTab('trips')} className={`nav-item ${activeTab === 'trips' ? 'active' : ''}`}><Map size={20} /> My Recent Trips</button>
         </nav>
 
         <button onClick={toggleTheme} className="nav-item">
@@ -100,10 +102,12 @@ const DriverDashboard = () => {
       </aside>
 
       <main className="main-content">
-        <h1 className="mb-8">My Performance Overview</h1>
-        
-        {/* KPI Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginBottom: '32px' }}>
+        {activeTab === 'stats' && (
+          <div className="animate-fade-in-up">
+            <h1 className="mb-8">My Performance Overview</h1>
+            
+            {/* KPI Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginBottom: '32px' }}>
           <div className="glass-card flex items-center justify-between animate-fade-in-up stagger-1 hover-scale hover-glow">
             <div><p className="input-label mb-2">Total Distance</p><h3>{data.total_distance.toLocaleString()} km</h3></div>
             <Map size={32} color="var(--accent-primary)" />
@@ -113,7 +117,7 @@ const DriverDashboard = () => {
             <Activity size={32} color={data.avg_performance > 80 ? 'var(--success)' : 'var(--warning)'} />
           </div>
           <div className="glass-card flex items-center justify-between animate-fade-in-up stagger-3 hover-scale hover-glow">
-            <div><p className="input-label mb-2">Total Earnings</p><h3>${data.total_income.toLocaleString()}</h3></div>
+            <div><p className="input-label mb-2">Total Earnings</p><h3>₹{data.total_income.toLocaleString()}</h3></div>
             <DollarSign size={32} color="var(--success)" />
           </div>
         </div>
@@ -158,7 +162,7 @@ const DriverDashboard = () => {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 2fr', gap: '24px', marginBottom: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '32px' }}>
           {/* Trip Route Distribution */}
           <div className="glass-card animate-fade-in-up stagger-1 hover-scale">
             <h3 className="mb-4 flex items-center gap-2"><Route color="#0ea5e9" /> Route Distribution</h3>
@@ -190,9 +194,15 @@ const DriverDashboard = () => {
               </ResponsiveContainer>
             </div>
           </div>
+        </div>
+        </div>
+        )}
 
-          {/* ML Range Predictor */}
-          <div id="ml" className="glass-card animate-fade-in-up stagger-2 hover-scale" style={{ border: '1px solid rgba(129, 140, 248, 0.4)' }}>
+        {/* ML Range Predictor Tab */}
+        {activeTab === 'ml' && (
+          <div className="animate-fade-in-up">
+            <h1 className="mb-8">AI Range Predictor</h1>
+            <div id="ml" className="glass-card hover-scale" style={{ border: '1px solid rgba(129, 140, 248, 0.4)' }}>
             <h3 className="mb-4 gradient-text flex items-center gap-4"><Battery /> AI Range Predictor</h3>
             <form onSubmit={handlePredict} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div className="input-group mb-0">
@@ -241,10 +251,13 @@ const DriverDashboard = () => {
             </form>
           </div>
         </div>
+        )}
 
-        {/* My Trips Table */}
-        <div className="glass-card animate-fade-in-up stagger-3 hover-scale">
-          <h3 className="mb-4">My Recent Trips</h3>
+        {/* My Trips Table Tab */}
+        {activeTab === 'trips' && (
+          <div className="animate-fade-in-up">
+            <h1 className="mb-8">My Recent Trips</h1>
+            <div className="glass-card hover-scale">
           <div className="table-container">
             <table>
               <thead>
@@ -258,13 +271,13 @@ const DriverDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.trips.map((trip, i) => (
+                {data.trips.slice(0, 10).map((trip, i) => (
                   <tr key={i}>
                     <td>{trip.date}</td>
-                    <td>{trip.car_name}</td>
+                    <td>{trip.vehicle_id}</td>
                     <td>{trip.predominant_location_type || 'City'}</td>
                     <td>{trip.daily_distance_km}</td>
-                    <td style={{ color: 'var(--success)', fontWeight: 'bold' }}>${trip.daily_income}</td>
+                    <td style={{ color: 'var(--success)', fontWeight: 'bold' }}>₹{trip.daily_income}</td>
                     <td>
                       <span className={`badge ${trip.performance_score > 80 ? 'badge-success' : 'badge-warning'}`}>
                         {trip.performance_score}
@@ -276,6 +289,8 @@ const DriverDashboard = () => {
             </table>
           </div>
         </div>
+        </div>
+        )}
       </main>
     </div>
   );
