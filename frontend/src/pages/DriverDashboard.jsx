@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import { LogOut, Battery, Map, Navigation, Activity, TrendingUp, IndianRupee as DollarSign, Route, Sun, Moon, AlertTriangle } from 'lucide-react';
+import { LogOut, Battery, Map, Navigation, Activity, TrendingUp, IndianRupee as DollarSign, Route, Sun, Moon, AlertTriangle, Gauge, Thermometer, Wind, Zap, CarFront, MonitorSmartphone } from 'lucide-react';
 import { 
   ComposedChart, AreaChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, PieChart, Pie, Cell, Legend 
@@ -18,13 +18,14 @@ const DriverDashboard = () => {
   
   // ML Predictor state
   const [mlInput, setMlInput] = useState({
-    current_battery_percent: 100,
-    current_speed_kmph: 60,
-    air_conditioning_usage: 1,
+    current_battery_pct: 100,
+    current_speed_kmh: 60,
     outside_temperature_c: 30,
-    avg_gradient_percent: 0,
-    road_type: 'City',
-    driver_behavior_score: 85
+    ac_status: 1,
+    vehicle_weight_kg: 1800,
+    driving_mode: 'Eco',
+    weather_condition: 'Sunny',
+    road_type: 'City'
   });
   const [prediction, setPrediction] = useState(null);
   const [mlLoading, setMlLoading] = useState(false);
@@ -63,9 +64,10 @@ const DriverDashboard = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const textFields = ['road_type', 'driving_mode', 'weather_condition'];
     setMlInput(prev => ({
       ...prev,
-      [name]: (name === 'road_type') ? value : parseFloat(value) || 0
+      [name]: textFields.includes(name) ? value : (parseFloat(value) || 0)
     }));
   };
 
@@ -84,10 +86,11 @@ const DriverDashboard = () => {
       <aside className="sidebar">
         <div>
           <h2 className="sidebar-title">Driver Portal</h2>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>ID: {user?.driver_id}</p>
+          <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Name: {data.driver_name}</p>
         </div>
         
         <nav className="flex-col gap-2" style={{ flex: 1, marginTop: '32px' }}>
+          <button onClick={() => setActiveTab('status')} className={`nav-item ${activeTab === 'status' ? 'active' : ''}`}><MonitorSmartphone size={20} /> Live Status</button>
           <button onClick={() => setActiveTab('stats')} className={`nav-item ${activeTab === 'stats' ? 'active' : ''}`}><Activity size={20} /> My Stats</button>
           <button onClick={() => setActiveTab('ml')} className={`nav-item ${activeTab === 'ml' ? 'active' : ''}`}><Battery size={20} /> Range Predictor</button>
           <button onClick={() => setActiveTab('trips')} className={`nav-item ${activeTab === 'trips' ? 'active' : ''}`}><Map size={20} /> My Recent Trips</button>
@@ -102,6 +105,181 @@ const DriverDashboard = () => {
       </aside>
 
       <main className="main-content">
+        {activeTab === 'status' && data.current_status && (
+          <div className="animate-fade-in-up" style={{
+            background: 'linear-gradient(135deg, #050505 0%, #111827 100%)',
+            borderRadius: '24px',
+            padding: '40px',
+            color: '#fff',
+            border: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 0 40px rgba(0,0,0,0.5) inset, 0 10px 30px rgba(0,0,0,0.5)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            <div style={{ position: 'absolute', top: '-50%', left: '-50%', width: '200%', height: '200%', background: `radial-gradient(circle, ${data.current_status.driving_mode === 'Eco' ? 'rgba(52,211,153,0.1)' : data.current_status.driving_mode === 'Sport' ? 'rgba(244,63,94,0.1)' : 'rgba(14,165,233,0.1)'} 0%, transparent 50%)`, zIndex: 0, pointerEvents: 'none' }}></div>
+            
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <div className="flex justify-between items-center mb-12">
+                <div>
+                  <h3 style={{ color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '12px', marginBottom: '4px' }}>{data.current_status.car_name || 'Vehicle'}</h3>
+                  <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>{data.driver_name}</h2>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <h3 style={{ color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '12px', marginBottom: '4px' }}>Odometer</h3>
+                  <h2 style={{ fontSize: '24px', fontFamily: 'monospace', marginBottom: '8px' }}>{data.current_status.odometer_km?.toLocaleString()} <span style={{fontSize:'14px', color: 'rgba(255,255,255,0.5)'}}>km</span></h2>
+                  <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255,255,255,0.1)', padding: '2px 8px', borderRadius: '12px' }}>
+                      <Route size={14} /> {data.current_status.road_type || 'City'}
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255,255,255,0.1)', padding: '2px 8px', borderRadius: '12px' }}>
+                      <Sun size={14} /> {data.current_status.weather_condition || 'Clear'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ width: '25%' }}>
+                  <div style={{ marginBottom: '32px' }}>
+                    <div className="flex items-center gap-2 mb-2"><Zap color="#34d399" /> <span style={{ color: 'rgba(255,255,255,0.6)' }}>Battery Level</span></div>
+                    <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#34d399' }}>
+                      {data.current_status.current_battery_pct}%
+                    </div>
+                    <div style={{ height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden', marginTop: '8px' }}>
+                      <div style={{ width: `${data.current_status.current_battery_pct}%`, height: '100%', background: '#34d399', boxShadow: '0 0 10px #34d399' }}></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-2"><Navigation color="#0ea5e9" /> <span style={{ color: 'rgba(255,255,255,0.6)' }}>Est. Range</span></div>
+                    <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#0ea5e9' }}>
+                      {data.current_status.actual_remaining_range_km?.toFixed(0)} <span style={{fontSize:'18px', color: 'rgba(255,255,255,0.5)'}}>km</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ width: '40%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ 
+                    width: '280px', height: '280px', borderRadius: '50%', 
+                    border: '4px solid rgba(255,255,255,0.05)', 
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: `0 0 50px ${data.current_status.driving_mode === 'Eco' ? 'rgba(52,211,153,0.2)' : data.current_status.driving_mode === 'Sport' ? 'rgba(244,63,94,0.2)' : 'rgba(14,165,233,0.2)'} inset, 0 0 20px rgba(0,0,0,0.5)`,
+                    position: 'relative'
+                  }}>
+                    <span style={{ position: 'absolute', top: '40px', color: 'rgba(255,255,255,0.4)', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '2px' }}>Speed</span>
+                    <h1 style={{ fontSize: '84px', fontWeight: '900', margin: 0, textShadow: '0 0 20px rgba(255,255,255,0.5)' }}>
+                      {data.current_status.current_speed_kmh?.toFixed(0) || 0}
+                    </h1>
+                    <span style={{ fontSize: '20px', color: 'rgba(255,255,255,0.5)', marginTop: '-10px' }}>km/h</span>
+                    
+                    <div style={{ 
+                      marginTop: '24px', padding: '4px 16px', borderRadius: '20px', 
+                      background: data.current_status.driving_mode === 'Eco' ? 'rgba(52,211,153,0.2)' : data.current_status.driving_mode === 'Sport' ? 'rgba(244,63,94,0.2)' : 'rgba(14,165,233,0.2)',
+                      color: data.current_status.driving_mode === 'Eco' ? '#34d399' : data.current_status.driving_mode === 'Sport' ? '#f43f5e' : '#0ea5e9',
+                      border: `1px solid ${data.current_status.driving_mode === 'Eco' ? '#34d399' : data.current_status.driving_mode === 'Sport' ? '#f43f5e' : '#0ea5e9'}`,
+                      textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 'bold'
+                    }}>
+                      {data.current_status.driving_mode} MODE
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ width: '25%', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                  <div className="flex items-center justify-between" style={{ background: 'rgba(255,255,255,0.05)', padding: '16px', borderRadius: '12px' }}>
+                    <div className="flex items-center gap-3"><Thermometer color="#f59e0b" /> <span style={{ color: 'rgba(255,255,255,0.7)' }}>Outside</span></div>
+                    <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{data.current_status.outside_temperature_c}°C</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-between" style={{ background: 'rgba(255,255,255,0.05)', padding: '16px', borderRadius: '12px' }}>
+                    <div className="flex items-center gap-3"><Activity color="#f43f5e" /> <span style={{ color: 'rgba(255,255,255,0.7)' }}>Bat Temp</span></div>
+                    <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{data.current_status.battery_temperature_c}°C</span>
+                  </div>
+
+                  <div className="flex items-center justify-between" style={{ background: 'rgba(255,255,255,0.05)', padding: '16px', borderRadius: '12px' }}>
+                    <div className="flex items-center gap-3"><Wind color={data.current_status.ac_status === 1 ? '#0ea5e9' : 'rgba(255,255,255,0.3)'} /> <span style={{ color: 'rgba(255,255,255,0.7)' }}>A/C Status</span></div>
+                    <span style={{ fontWeight: 'bold', fontSize: '18px', color: data.current_status.ac_status === 1 ? '#0ea5e9' : 'rgba(255,255,255,0.3)' }}>
+                      {data.current_status.ac_status === 1 ? 'ON' : 'OFF'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Futuristic Route Map */}
+              <div style={{ 
+                marginTop: '40px', 
+                background: 'rgba(0, 0, 0, 0.4)', 
+                borderRadius: '16px', 
+                padding: '24px', 
+                border: '1px solid rgba(14, 165, 233, 0.3)',
+                boxShadow: '0 0 20px rgba(14, 165, 233, 0.1) inset',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Cyberpunk Grid Background */}
+                <div style={{
+                  position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                  backgroundImage: 'linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px)',
+                  backgroundSize: '20px 20px',
+                  opacity: 0.5,
+                  zIndex: 0,
+                  pointerEvents: 'none'
+                }}></div>
+                
+                <h3 style={{ position: 'relative', zIndex: 1, color: '#0ea5e9', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '12px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Map size={16} /> GPS Navigation System
+                </h3>
+
+                <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 40px' }}>
+                  
+                  {/* Start City */}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ 
+                      width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(52, 211, 153, 0.2)', 
+                      border: '2px solid #34d399', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: '0 0 15px #34d399'
+                    }}>
+                      <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#34d399' }}></div>
+                    </div>
+                    <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                      {data.current_status.start_city || 'Origin'}
+                    </span>
+                    <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Departed</span>
+                  </div>
+
+                  {/* Connecting Line / Route */}
+                  <div style={{ flex: 1, margin: '0 24px', position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <div style={{ width: '100%', borderBottom: '2px dashed rgba(14, 165, 233, 0.5)', position: 'absolute' }}></div>
+                    <div style={{ 
+                      position: 'absolute', left: '50%', transform: 'translateX(-50%)',
+                      background: '#0ea5e9', padding: '8px 16px', borderRadius: '20px',
+                      boxShadow: '0 0 20px #0ea5e9', display: 'flex', alignItems: 'center', gap: '8px',
+                      color: '#fff', fontSize: '12px', fontWeight: 'bold', textTransform: 'uppercase'
+                    }}>
+                      <Navigation size={14} /> En Route
+                    </div>
+                  </div>
+
+                  {/* Destination City */}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ 
+                      width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(244, 63, 94, 0.2)', 
+                      border: '2px solid #f43f5e', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: '0 0 15px #f43f5e'
+                    }}>
+                      <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f43f5e' }}></div>
+                    </div>
+                    <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                      {data.current_status.destination_city || 'Destination'}
+                    </span>
+                    <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Arrival</span>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+
         {activeTab === 'stats' && (
           <div className="animate-fade-in-up">
             <h1 className="mb-8">My Performance Overview</h1>
@@ -206,24 +384,41 @@ const DriverDashboard = () => {
             <h3 className="mb-4 gradient-text flex items-center gap-4"><Battery /> AI Range Predictor</h3>
             <form onSubmit={handlePredict} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div className="input-group mb-0">
-                <label className="input-label">Current Battery %</label>
-                <input type="number" name="current_battery_percent" value={mlInput.current_battery_percent} onChange={handleInputChange} className="glass-input" required />
+                <label className="input-label">Battery (%)</label>
+                <input type="number" name="current_battery_pct" value={mlInput.current_battery_pct} onChange={handleInputChange} className="glass-input" min="0" max="100" required />
               </div>
               <div className="input-group mb-0">
                 <label className="input-label">Current Speed (km/h)</label>
-                <input type="number" name="current_speed_kmph" value={mlInput.current_speed_kmph} onChange={handleInputChange} className="glass-input" required />
-              </div>
-              <div className="input-group mb-0">
-                <label className="input-label">AC Status (0/1)</label>
-                <input type="number" name="air_conditioning_usage" value={mlInput.air_conditioning_usage} onChange={handleInputChange} className="glass-input" min="0" max="1" required />
+                <input type="number" name="current_speed_kmh" value={mlInput.current_speed_kmh} onChange={handleInputChange} className="glass-input" min="0" required />
               </div>
               <div className="input-group mb-0">
                 <label className="input-label">Outside Temp (°C)</label>
                 <input type="number" name="outside_temperature_c" value={mlInput.outside_temperature_c} onChange={handleInputChange} className="glass-input" required />
               </div>
               <div className="input-group mb-0">
-                <label className="input-label">Avg Gradient (%)</label>
-                <input type="number" step="0.1" name="avg_gradient_percent" value={mlInput.avg_gradient_percent} onChange={handleInputChange} className="glass-input" required />
+                <label className="input-label">AC Status (0/1)</label>
+                <input type="number" name="ac_status" value={mlInput.ac_status} onChange={handleInputChange} className="glass-input" min="0" max="1" required />
+              </div>
+              <div className="input-group mb-0">
+                <label className="input-label">Vehicle Weight (kg)</label>
+                <input type="number" name="vehicle_weight_kg" value={mlInput.vehicle_weight_kg} onChange={handleInputChange} className="glass-input" min="1000" required />
+              </div>
+              <div className="input-group mb-0">
+                <label className="input-label">Driving Mode</label>
+                <select name="driving_mode" value={mlInput.driving_mode} onChange={handleInputChange} className="glass-input">
+                  <option value="Eco">Eco</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Sport">Sport</option>
+                </select>
+              </div>
+              <div className="input-group mb-0">
+                <label className="input-label">Weather Condition</label>
+                <select name="weather_condition" value={mlInput.weather_condition} onChange={handleInputChange} className="glass-input">
+                  <option value="Sunny">Sunny</option>
+                  <option value="Cloudy">Cloudy</option>
+                  <option value="Rainy">Rainy</option>
+                  <option value="Foggy">Foggy</option>
+                </select>
               </div>
               <div className="input-group mb-0">
                 <label className="input-label">Road Type</label>
@@ -231,10 +426,6 @@ const DriverDashboard = () => {
                   <option value="City">City</option>
                   <option value="Highway">Highway</option>
                 </select>
-              </div>
-              <div className="input-group mb-0">
-                <label className="input-label">Efficiency Score (0 - 100)</label>
-                <input type="number" name="driver_behavior_score" value={mlInput.driver_behavior_score} onChange={handleInputChange} className="glass-input" required />
               </div>
               
               <div className="flex items-center" style={{ gridColumn: '1 / -1', marginTop: '16px' }}>

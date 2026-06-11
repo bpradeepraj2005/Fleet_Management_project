@@ -1,11 +1,23 @@
 import pandas as pd
 import os
+import threading
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(BASE_DIR, 'unified_ev_fleet_dataset_final.csv')
+DATA_PATH = os.path.join(BASE_DIR, 'Final_dataset_fleet.pkl')
+
+_cached_df = None
+_df_lock = threading.Lock()
 
 def get_dataframe():
-    df = pd.read_csv(DATA_PATH)
+    global _cached_df
+    if _cached_df is not None:
+        return _cached_df.copy()
+
+    with _df_lock:
+        if _cached_df is not None:
+            return _cached_df.copy()
+            
+        df = pd.read_pickle(DATA_PATH)
     
     # Fix random synthetic vehicle assignments so each vehicle_id has exactly 1 manufacturer and model
     first_assignments = df.drop_duplicates(subset=['vehicle_id'])[['vehicle_id', 'manufacturer', 'car_model']]
@@ -16,23 +28,41 @@ def get_dataframe():
     if 'car_name' not in df.columns:
         df['car_name'] = df['manufacturer'] + ' ' + df['car_model']
     
-    if 'daily_income' not in df.columns:
+    if 'daily_income' not in df.columns and 'trip_distance_km' in df.columns:
         df['daily_income'] = df['trip_distance_km'] * 1.5
         
-    if 'maintenance_charges' not in df.columns:
+    if 'maintenance_charges' not in df.columns and 'daily_income' in df.columns:
         df['maintenance_charges'] = df['daily_income'] * 0.12
         
     if 'total_harsh_events' not in df.columns:
-        df['total_harsh_events'] = df['harsh_braking_count'] + df['sharp_turn_count']
+        df['total_harsh_events'] = df.get('harsh_acceleration_instances', df.get('harsh_braking_count', 0)) + df.get('harsh_braking_instances', df.get('sharp_turn_count', 0))
         
     # Map other columns for backward compatibility in the dashboard components
-    df['performance_score'] = df['driver_behavior_score']
-    df['daily_distance_km'] = df['trip_distance_km']
-    df['date'] = df['timestamp']
-    df['predominant_location_type'] = df['road_type']
-    df['initial_battery_health_pct'] = df['state_of_health_soh']
-    
-    return df
+    if 'performance_score' not in df.columns and 'driver_behavior_score' in df.columns:
+        df['performance_score'] = df['driver_behavior_score']
+    if 'daily_distance_km' not in df.columns and 'trip_distance_km' in df.columns:
+        df['daily_distance_km'] = df['trip_distance_km']
+    if 'trip_distance_km' not in df.columns and 'daily_distance_km' in df.columns:
+        df['trip_distance_km'] = df['daily_distance_km']
+    if 'date' not in df.columns and 'timestamp' in df.columns:
+        df['date'] = df['timestamp']
+    if 'predominant_location_type' not in df.columns and 'road_type' in df.columns:
+        df['predominant_location_type'] = df['road_type']
+    if 'initial_battery_health_pct' not in df.columns and 'state_of_health_soh' in df.columns:
+        df['initial_battery_health_pct'] = df['state_of_health_soh']
+    if 'trip_id' not in df.columns:
+        df['trip_id'] = df['timestamp']
+    if 'harsh_braking_count' not in df.columns and 'harsh_braking_instances' in df.columns:
+        df['harsh_braking_count'] = df['harsh_braking_instances']
+    if 'sharp_turn_count' not in df.columns and 'harsh_acceleration_instances' in df.columns:
+        df['sharp_turn_count'] = df['harsh_acceleration_instances']
+    if 'car_name' not in df.columns and 'car_model' in df.columns:
+        df['car_name'] = df['car_model']
+    if 'vehicle_age_years' not in df.columns and 'manufacturing_year' in df.columns:
+        df['vehicle_age_years'] = 2024 - df['manufacturing_year']
+        
+    _cached_df = df
+    return df.copy()
 
 def load_vehicles():
     df = get_dataframe()
@@ -41,7 +71,7 @@ def load_vehicles():
     max_date = df['timestamp_dt'].max()
     three_months_ago = max_date - pd.Timedelta(days=90)
     last_3m_df = df[df['timestamp_dt'] >= three_months_ago].copy()
-    last_3m_df['charging_cost'] = (last_3m_df['trip_distance_km'] * last_3m_df['energy_efficiency_wh_per_km']) / 1000 * 0.20
+    last_3m_df['charging_cost'] = (last_3m_df['trip_distance_km'] * last_3m_df['energy_efficiency_wh_per_km']) / 1000 * 18.50
     
     agg_stats = last_3m_df.groupby('vehicle_id').agg(
         income_3m=('daily_income', 'sum'),
@@ -53,7 +83,7 @@ def load_vehicles():
     vehicles_df = pd.merge(vehicles_df, agg_stats, on='vehicle_id', how='left')
     vehicles_df.fillna({'income_3m': 0, 'maintenance_3m': 0, 'charging_cost_3m': 0}, inplace=True)
     
-    df['charging_cost'] = (df['trip_distance_km'] * df['energy_efficiency_wh_per_km']) / 1000 * 0.20
+    df['charging_cost'] = (df['trip_distance_km'] * df['energy_efficiency_wh_per_km']) / 1000 * 18.50
     history_df = df.sort_values('timestamp')[['vehicle_id', 'timestamp', 'state_of_health_soh', 'daily_income', 'trip_distance_km', 'maintenance_charges', 'charging_cost']]
     history_dict = {}
     for vid, group in history_df.groupby('vehicle_id'):
@@ -82,7 +112,7 @@ def get_admin_dashboard_stats():
     total_maintenance = float(df['maintenance_charges'].sum())
     total_distance = float(df['daily_distance_km'].sum())
     avg_fleet_performance = float(df['performance_score'].mean())
-    total_harsh_events = int(df['total_harsh_events'].sum())
+    total_harsh_events = int(df['total_harsh_events'].mean())
     
     # 3 Months data
     df['timestamp_dt'] = pd.to_datetime(df['timestamp'])
@@ -90,18 +120,18 @@ def get_admin_dashboard_stats():
     three_months_ago = max_date - pd.Timedelta(days=90)
     last_3m_df = df[df['timestamp_dt'] >= three_months_ago].copy()
     
-    last_3m_df['charging_cost'] = (last_3m_df['trip_distance_km'] * last_3m_df['energy_efficiency_wh_per_km']) / 1000 * 0.20
+    last_3m_df['charging_cost'] = (last_3m_df['trip_distance_km'] * last_3m_df['energy_efficiency_wh_per_km']) / 1000 * 18.50
     
     income_last_3m = float(last_3m_df['daily_income'].sum())
     charging_spent_last_3m = float(last_3m_df['charging_cost'].sum())
-    violations_last_3m = int(last_3m_df['total_harsh_events'].sum())
+    violations_last_3m = int(last_3m_df['total_harsh_events'].mean())
     
-    df['charging_cost'] = (df['trip_distance_km'] * df['energy_efficiency_wh_per_km']) / 1000 * 0.20
-    trend_df = df.groupby('date').agg({'daily_income': 'sum', 'charging_cost': 'sum', 'total_harsh_events': 'sum', 'maintenance_charges': 'sum'}).reset_index()
+    df['charging_cost'] = (df['trip_distance_km'] * df['energy_efficiency_wh_per_km']) / 1000 * 18.50
+    trend_df = df.groupby('date').agg({'daily_income': 'sum', 'charging_cost': 'sum', 'total_harsh_events': 'mean', 'maintenance_charges': 'sum'}).reset_index()
     trend_df['total_expense'] = trend_df['charging_cost'] + trend_df['maintenance_charges']
     trend_all = trend_df.sort_values('date').to_dict(orient='records')
     
-    viol_df = last_3m_df.groupby('driver_id')['total_harsh_events'].sum().reset_index()
+    viol_df = last_3m_df.groupby(['driver_id', 'driver_name'])['total_harsh_events'].mean().reset_index()
     top_violations_3m = viol_df.sort_values('total_harsh_events', ascending=False).head(5).to_dict(orient='records')
     
     # Get last 10 trips
@@ -146,13 +176,13 @@ def get_admin_drivers_stats():
     df = get_dataframe()
     
     # All-time stats
-    grouped = df.groupby('driver_id').agg(
+    grouped = df.groupby(['driver_id', 'driver_name']).agg(
         total_trips=('trip_id', 'count'),
         total_distance=('daily_distance_km', 'sum'),
         total_income=('daily_income', 'sum'),
         avg_performance=('performance_score', 'mean'),
-        total_harsh_braking=('harsh_braking_count', 'sum'),
-        total_harsh_acceleration=('sharp_turn_count', 'sum')
+        total_harsh_braking=('harsh_braking_count', 'mean'),
+        total_harsh_acceleration=('sharp_turn_count', 'mean')
     ).reset_index()
     
     grouped['total_harsh_events'] = grouped['total_harsh_braking'] + grouped['total_harsh_acceleration']
@@ -168,15 +198,15 @@ def get_admin_drivers_stats():
     
     last_3m_df['total_harsh_events'] = last_3m_df['harsh_braking_count'] + last_3m_df['sharp_turn_count']
     
-    agg_3m = last_3m_df.groupby('driver_id').agg(
+    agg_3m = last_3m_df.groupby(['driver_id', 'driver_name']).agg(
         income_3m=('daily_income', 'sum'),
         distance_3m=('daily_distance_km', 'sum'),
-        violations_3m=('total_harsh_events', 'sum'),
+        violations_3m=('total_harsh_events', 'mean'),
         avg_performance_3m=('performance_score', 'mean')
     ).reset_index()
     
     # Merge 3M stats with all-time stats
-    merged = pd.merge(grouped, agg_3m, on='driver_id', how='left')
+    merged = pd.merge(grouped, agg_3m, on=['driver_id', 'driver_name'], how='left')
     merged.fillna({'income_3m': 0, 'distance_3m': 0, 'violations_3m': 0, 'avg_performance_3m': 0}, inplace=True)
     
     merged['distance_3m'] = merged['distance_3m'].round(1)
@@ -201,15 +231,19 @@ def get_driver_dashboard_stats(driver_id):
     total_distance = driver_trips['daily_distance_km'].sum()
     avg_performance = driver_trips['performance_score'].mean() if not driver_trips.empty else 0
     total_income = driver_trips['daily_income'].sum()
+    driver_name = str(driver_trips['driver_name'].iloc[0]) if not driver_trips.empty else "Unknown"
+
     
     trips = driver_trips.sort_values('date', ascending=False).to_dict(orient='records')
+    
+    current_status = trips[0] if trips else None
     
     recent_10 = driver_trips.sort_values('date', ascending=False).head(10).iloc[::-1]
     efficiency_trend = recent_10[['date', 'energy_efficiency_wh_per_km']].to_dict(orient='records')
     
     harsh_events_breakdown = [
-        {"name": "Harsh Braking", "count": int(driver_trips['harsh_braking_count'].sum())},
-        {"name": "Sharp Turns", "count": int(driver_trips['sharp_turn_count'].sum())}
+        {"name": "Harsh Acceleration", "count": int(driver_trips.get('harsh_acceleration_instances', driver_trips.get('harsh_braking_count', pd.Series([0]))).mean())},
+        {"name": "Harsh Braking", "count": int(driver_trips.get('harsh_braking_instances', driver_trips.get('sharp_turn_count', pd.Series([0]))).mean())}
     ]
     
     mode_dist = driver_trips['driving_mode'].value_counts().reset_index()
@@ -217,6 +251,8 @@ def get_driver_dashboard_stats(driver_id):
     mode_dist = mode_dist.to_dict(orient='records')
     
     return {
+        "driver_name": driver_name,
+        "current_status": current_status,
         "total_distance": total_distance,
         "avg_performance": round(avg_performance, 2),
         "total_income": round(total_income, 2),

@@ -4,10 +4,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import pickle
 import os
+import data_service
 
 # Paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(BASE_DIR, 'unified_ev_fleet_dataset_final.csv')
+DATA_PATH = os.path.join(BASE_DIR, 'Final_dataset_fleet.xlsx')
 MODEL_PATH = os.path.join(BASE_DIR, 'backend', 'range_model.pkl')
 ENCODERS_PATH = os.path.join(BASE_DIR, 'backend', 'encoders.pkl')
 
@@ -17,13 +18,13 @@ def train_model():
         return
 
     # Load data
-    df = pd.read_csv(DATA_PATH)
+    df = pd.read_excel(DATA_PATH)
 
     # Select features and target
-    features = ['current_battery_percent', 'current_speed_kmph', 'air_conditioning_usage', 
-                'outside_temperature_c', 'avg_gradient_percent', 'road_type', 
-                'driver_behavior_score']
-    target = 'estimated_remaining_range_km'
+    features = ['current_battery_pct', 'current_speed_kmh', 'ac_status', 
+                'outside_temperature_c', 'vehicle_weight_kg', 'road_type', 
+                'weather_condition', 'driving_mode']
+    target = 'actual_remaining_range_km'
 
     # Filter out rows with missing target or features
     df = df.dropna(subset=features + [target])
@@ -33,7 +34,7 @@ def train_model():
 
     # Encode categorical variables
     encoders = {}
-    for col in ['road_type']:
+    for col in ['road_type', 'weather_condition', 'driving_mode']:
         le = LabelEncoder()
         X[col] = le.fit_transform(X[col])
         encoders[col] = le
@@ -73,14 +74,20 @@ def predict_range(data_dict):
     df = pd.DataFrame([data_dict])
 
     # Encode categorical
-    for col in ['road_type']:
+    cat_cols = ['driving_mode', 'weather_condition', 'road_type']
+    for col in cat_cols:
         if col in df.columns:
-            # Handle unseen labels gracefully if needed, here we assume valid inputs
             try:
-                df[col] = encoders[col].transform(df[col])
+                df[col] = encoders[col].transform(df[col].astype(str))
             except ValueError:
                 # Default to a generic value if unknown
                 df[col] = encoders[col].transform([encoders[col].classes_[0]])
+
+    # Reorder columns to match training features
+    features = ['current_battery_pct', 'current_speed_kmh', 'ac_status', 
+                'outside_temperature_c', 'vehicle_weight_kg', 'road_type', 
+                'weather_condition', 'driving_mode']
+    df = df[features]
 
     prediction = model.predict(df)
     return prediction[0]

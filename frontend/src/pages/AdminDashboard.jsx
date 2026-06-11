@@ -114,7 +114,7 @@ const AdminDashboard = () => {
   }));
 
   const effortRewardData = drivers.map(d => ({
-    id: d.driver_id, distance: d.total_distance, income: d.total_income
+    name: d.driver_name, distance: d.total_distance, income: d.total_income
   }));
 
   const processedVehicles = getSortedAndFilteredData(vehicles, ['vehicle_id', 'car_name'], (item, status) => {
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
     if (status === 'warning') return item.initial_battery_health_pct <= 93;
     return true;
   });
-  const processedDrivers = getSortedAndFilteredData(drivers, ['driver_id'], (item, status) => {
+  const processedDrivers = getSortedAndFilteredData(drivers, ['driver_name'], (item, status) => {
     if (status === 'good') return item.avg_performance > 80;
     if (status === 'warning') return item.avg_performance <= 80;
     return true;
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
     { label: 'Health Status', value: 'initial_battery_health_pct' }
   ];
   const driverSortOptions = [
-    { label: 'Driver ID', value: 'driver_id' },
+    { label: 'Driver Name', value: 'driver_name' },
     { label: 'Total Distance', value: 'total_distance' },
     { label: 'Total Revenue', value: 'total_income' },
     { label: 'Harsh Events', value: 'total_harsh_events' },
@@ -453,7 +453,7 @@ const AdminDashboard = () => {
                     <BarChart data={data.top_violations_3m} layout="vertical">
                       <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border)" horizontal={false} />
                       <XAxis type="number" stroke="var(--text-secondary)" tick={{fontSize: 12}} />
-                      <YAxis dataKey="driver_id" type="category" stroke="var(--text-secondary)" tick={{fontSize: 12}} width={80} />
+                      <YAxis dataKey="driver_name" type="category" stroke="var(--text-secondary)" tick={{fontSize: 12}} width={80} />
                       <Tooltip contentStyle={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--glass-border)', borderRadius: '8px' }} labelStyle={{ color: '#f8fafc' }} itemStyle={{ color: '#e2e8f0' }} />
                       <Bar dataKey="total_harsh_events" fill="#f43f5e" name="Violations" radius={[0, 4, 4, 0]} animationDuration={1500} />
                     </BarChart>
@@ -541,17 +541,26 @@ const AdminDashboard = () => {
                   </div>
                 ) : (
                   <div className="glass-card mb-8 animate-fade-in-up stagger-3 hover-scale">
-                    <h3 className="mb-4">Fleet Battery Degradation Analysis</h3>
+                    <h3 className="mb-4 flex items-center gap-2"><Car color="#8b5cf6" /> Fleet Distribution by Model</h3>
                     <div style={{ height: '300px' }}>
                       <ResponsiveContainer>
-                        <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                          <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border)" />
-                          <XAxis type="number" dataKey="vehicle_age_years" name="Age" unit=" yrs" stroke="var(--text-secondary)" tick={{fontSize: 12}} label={{ value: 'Vehicle Age (Years)', position: 'insideBottom', offset: -10, fill: 'var(--text-secondary)', fontSize: 12 }} />
-                          <YAxis type="number" dataKey="initial_battery_health_pct" name="SoH" unit="%" domain={['dataMin - 2', 'dataMax + 2']} stroke="var(--text-secondary)" tick={{fontSize: 12}} label={{ value: 'State of Health (%)', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12, style: {textAnchor: 'middle'} }} />
-                          <ZAxis type="category" dataKey="vehicle_id" name="Vehicle ID" />
-                          <Tooltip cursor={{strokeDasharray: '3 3'}} contentStyle={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--glass-border)', borderRadius: '8px' }} labelStyle={{ color: '#f8fafc' }} itemStyle={{ color: '#e2e8f0' }} />
-                          <Scatter name="Battery Health" data={vehicles} fill="#8b5cf6" animationDuration={1500} />
-                        </ScatterChart>
+                        <PieChart>
+                          <Pie 
+                            data={fleetDistData} 
+                            innerRadius={60} 
+                            outerRadius={90} 
+                            paddingAngle={5} 
+                            dataKey="value" 
+                            nameKey="name"
+                            animationDuration={1000} 
+                            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} 
+                            labelLine={{ stroke: 'var(--text-secondary)' }}
+                          >
+                            {fleetDistData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                          </Pie>
+                          <Tooltip contentStyle={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--glass-border)', borderRadius: '8px' }} labelStyle={{ color: '#f8fafc' }} itemStyle={{ color: '#e2e8f0' }} />
+                          <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '12px', paddingTop: '20px' }} />
+                        </PieChart>
                       </ResponsiveContainer>
                     </div>
                   </div>
@@ -602,7 +611,7 @@ const AdminDashboard = () => {
                 {selectedDriver ? (
                   <div className="glass-card mb-8 animate-fade-in-up hover-scale">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                      <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Users color="var(--accent-primary)" /> {selectedDriver.driver_id}</h3>
+                      <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Users color="var(--accent-primary)" /> {selectedDriver.driver_name}</h3>
                       <button onClick={() => setSelectedDriver(null)} style={{ background: 'transparent', border: '1px solid var(--glass-border)', color: 'var(--text-secondary)', padding: '6px 16px', borderRadius: '4px', cursor: 'pointer' }}>Close</button>
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px', marginBottom: '24px' }}>
@@ -643,7 +652,7 @@ const AdminDashboard = () => {
                       <ResponsiveContainer>
                         <BarChart data={drivers.slice(0, 10)}>
                           <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border)" vertical={false} />
-                          <XAxis dataKey="driver_id" stroke="var(--text-secondary)" tick={{fontSize: 11, angle: -45, textAnchor: 'end'}} interval={0} height={60} label={{ value: 'Driver ID', position: 'insideBottom', offset: -15, fill: 'var(--text-secondary)' }} />
+                          <XAxis dataKey="driver_name" stroke="var(--text-secondary)" tick={{fontSize: 11, angle: -45, textAnchor: 'end'}} interval={0} height={60} label={{ value: 'Driver Name', position: 'insideBottom', offset: -15, fill: 'var(--text-secondary)' }} />
                           <YAxis stroke="var(--text-secondary)" tick={{fontSize: 12}} label={{ value: 'Total Trips', angle: -90, position: 'insideLeft', fill: 'var(--text-secondary)', fontSize: 12, style: {textAnchor: 'middle'} }} />
                           <Tooltip contentStyle={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--glass-border)', borderRadius: '8px' }} labelStyle={{ color: '#f8fafc' }} itemStyle={{ color: '#e2e8f0' }} />
                           <Bar dataKey="total_trips" name="Number of Trips" fill="#34d399" radius={[4, 4, 0, 0]} animationDuration={1500} />
@@ -663,7 +672,7 @@ const AdminDashboard = () => {
                     <table style={{ width: '100%' }}>
                       <thead style={{ position: 'sticky', top: 0, background: 'var(--bg-primary)', zIndex: 1 }}>
                       <tr>
-                        <th onClick={() => handleSort('driver_id')} style={{ cursor: 'pointer' }}>Driver ID <SortIcon columnKey="driver_id" /></th>
+                        <th onClick={() => handleSort('driver_name')} style={{ cursor: 'pointer' }}>Driver Name <SortIcon columnKey="driver_name" /></th>
                         <th onClick={() => handleSort('total_distance')} style={{ cursor: 'pointer' }}>Total Distance <SortIcon columnKey="total_distance" /></th>
                         <th onClick={() => handleSort('total_income')} style={{ cursor: 'pointer' }}>Total Revenue <SortIcon columnKey="total_income" /></th>
                         <th onClick={() => handleSort('total_harsh_events')} style={{ cursor: 'pointer' }}>Harsh Events <SortIcon columnKey="total_harsh_events" /></th>
@@ -673,7 +682,7 @@ const AdminDashboard = () => {
                     <tbody>
                       {processedDrivers.map((d, i) => (
                         <tr key={i} onClick={() => setSelectedDriver(d)} style={{ cursor: 'pointer' }} className="hover-row">
-                          <td style={{ fontWeight: 'bold' }}>{d.driver_id}</td>
+                          <td style={{ fontWeight: 'bold' }}>{d.driver_name}</td>
                           <td>{d.total_distance.toLocaleString()} km</td>
                           <td style={{ color: 'var(--success)', fontWeight: 'bold' }}>₹{d.total_income.toLocaleString()}</td>
                           <td><span style={{ color: d.total_harsh_events > 15 ? 'var(--danger)' : 'var(--text-secondary)' }}>{d.total_harsh_events}</span></td>

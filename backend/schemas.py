@@ -25,13 +25,14 @@ class Token(BaseModel):
     token_type: str
 
 class RangePredictionRequest(BaseModel):
-    current_battery_percent: float
-    current_speed_kmph: float
-    air_conditioning_usage: int
+    current_battery_pct: float
+    current_speed_kmh: float
     outside_temperature_c: float
-    avg_gradient_percent: float
+    ac_status: int
+    vehicle_weight_kg: float
+    driving_mode: str
+    weather_condition: str
     road_type: str
-    driver_behavior_score: float
 
 class RangePredictionResponse(BaseModel):
     predicted_range_km: float
